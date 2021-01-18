@@ -12,7 +12,9 @@
   },
   "browserslist": ">1%, not dead",
   "keywords": [
-    "webpack", "react", "todo"
+    "webpack",
+    "react",
+    "todo"
   ],
   "author": "SergZu",
   "license": "ISC",
