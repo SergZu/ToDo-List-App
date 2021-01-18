@@ -1,8 +1,14 @@
 import React from 'react';
+import TaskList from '../TaskList';
+import TaskAddForm from '../TaskAddForm';
 
-const App = function(props) {
+const App = function() {
     return (
-        <h1>Hello there</h1>
+        <>
+            <h1>ToDo List</h1>
+            <TaskList />
+            <TaskAddForm />
+        </>
     )
 }
 
