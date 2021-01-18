@@ -31,7 +31,7 @@ module.exports = env => {
 		plugins: [
 			new HtmlWebpackPlugin({ 
 				title: 'Webpack Test',
-				template: path.resolve(__dirname, '/src/template.html'),
+				template: path.resolve(__dirname, './src/template.html'),
 				filename: 'index.html'
 
 			}),
