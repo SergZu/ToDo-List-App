@@ -1,7 +1,7 @@
 {
-  "name": "webpack_config_test",
+  "name": "ToDo List",
   "version": "1.0.0",
-  "description": "My test config",
+  "description": "My React ToDo list app",
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,7 +12,7 @@
   },
   "browserslist": ">1%, not dead",
   "keywords": [
-    "webpack"
+    "webpack", "react", "todo"
   ],
   "author": "SergZu",
   "license": "ISC",
