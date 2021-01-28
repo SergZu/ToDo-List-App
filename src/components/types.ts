@@ -1,6 +1,6 @@
 type mark = 'none' | 'blue' | 'green' | 'red' | 'black';
 
-interface options {
+export interface options {
     showCompleted: boolean;
     splited : boolean;
     currentMark : mark;
@@ -12,9 +12,3 @@ export interface task {
     complete : boolean;
     mark : mark;
 }
-
-
-export interface TaskListProps {
-    tasks : task[] | [];
-    viewOptions : options;
-} 
