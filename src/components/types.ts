@@ -1,4 +1,4 @@
-type mark = 'none' | 'blue' | 'green' | 'red' | 'black';
+export type mark = 'none' | 'blue' | 'green' | 'red' | 'black';
 
 export interface options {
     showCompleted: boolean;
@@ -7,8 +7,20 @@ export interface options {
 }
 
 export interface task {
-    id : number;
+    id : string;
     text : string;
     complete : boolean;
     mark : mark;
 }
+
+export interface Task {
+    data : task;
+    completeTaskClickHandler : React.ChangeEventHandler<HTMLInputElement>;
+    setTaskChecked : (id : string) => void;
+}
+
+export interface TaskListProps {
+    tasks : task[] | [];
+    viewOptions : options;
+    setTaskChecked : (id : string) => void;
+} 
