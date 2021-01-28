@@ -6,21 +6,21 @@ export interface options {
     currentMark : mark;
 }
 
-export interface task {
+export interface taskType {
     id : string;
     text : string;
     complete : boolean;
     mark : mark;
 }
 
-export interface Task {
-    data : task;
-    completeTaskClickHandler : React.ChangeEventHandler<HTMLInputElement>;
+export interface TaskElementType {
+    data : taskType;
+    completeTaskClickHandler : (target : Element) => void;
     setTaskChecked : (id : string) => void;
 }
 
 export interface TaskListProps {
-    tasks : task[] | [];
+    tasks : taskType[] | [];
     viewOptions : options;
     setTaskChecked : (id : string) => void;
 } 
