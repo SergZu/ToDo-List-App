@@ -15,6 +15,6 @@ export interface task {
 
 
 export interface TaskListProps {
-    tasks : task[];
+    tasks : task[] | [];
     viewOptions : options;
 } 
