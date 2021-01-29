@@ -49,9 +49,11 @@ const TaskList = function(props : TaskListProps) {
         return result
     };
 
+    const layout = (props.tasks.length === 0) ? (<div className='tasklist-placeholder'>Add your first task</div>) : createList(props.tasks, props.viewOptions);
+
     return (
         <ul className='tasklist'>
-            {createList(props.tasks, props.viewOptions)}
+            {layout}
         </ul>
     )
 };
