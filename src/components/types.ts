@@ -1,9 +1,9 @@
-export type mark = 'none' | 'blue' | 'green' | 'red' | 'black';
+export type mark = 'none' | 'blue' | 'green' | 'red' | 'black' ;
 
 export interface options {
     showCompleted: boolean;
     splited : boolean;
-    currentMark : mark;
+    currentMark : mark | '';
 }
 
 export interface taskType {

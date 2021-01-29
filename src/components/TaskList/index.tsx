@@ -15,6 +15,14 @@ const Task = function(props : TaskElementType) {
 };
 
 const TaskList = function(props : TaskListProps) {
+
+    const markPriorities = {
+        red : 0,
+        black : 1,
+        blue : 2,
+        green : 3,
+        none : 4,
+    };
     
     const onChangeHandler : React.ChangeEventHandler = (evt) => {
         const target  = evt.target.closest('.task');
@@ -23,11 +31,15 @@ const TaskList = function(props : TaskListProps) {
 
     const createList = (taskData : taskType[] | [], options : options) => {
         let targetArray = [...taskData];
-        if (options.currentMark !== 'none') {
+        if (options.currentMark !== '') {
             targetArray = taskData.filter((item) => item.mark === options.currentMark );
         };
         if (options.splited) {
-            targetArray.sort((a,b) => ( a.mark !== b.mark ) ? 1 : 0 );
+            targetArray.sort((a,b) => {
+                const itemA = markPriorities[a.mark];
+                const itemB = markPriorities[b.mark];
+                return itemA - itemB; 
+            });
         };
         if (!options.showCompleted) {
             targetArray = targetArray.filter((item) => !item.complete);
@@ -38,7 +50,7 @@ const TaskList = function(props : TaskListProps) {
     };
 
     return (
-        <ul>
+        <ul className='tasklist'>
             {createList(props.tasks, props.viewOptions)}
         </ul>
     )

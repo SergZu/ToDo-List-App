@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
 import TaskList from '../TaskList';
 import TaskAddForm from '../TaskAddForm';
+import TaskListFilter from '../TaskListFilter';
 import { options, taskType } from '../types';
 
 const App = function() {
+
     const [data, setData] = useState( () : taskType[] =>([
         {text : 'Do anything', id : '1', complete : false, mark : 'none'},
-        {text : 'Do anything else', id : '2', complete : true, mark : 'none'},
+        {text : 'Do anything else', id : '2', complete : true, mark : 'blue'},
         {text : 'You spin me ...', id : '3', complete : false, mark : 'none'},
-        {text : 'Right now, baby right now', id : '4', complete : true, mark : 'none'},
+        {text : 'Right now, baby right now', id : '4', complete : true, mark : 'red'},
     ]) );
-    const getOptions = () : options => ({
+
+    const [optionsData, setOptionsData] = useState( () : options =>({
         showCompleted: false,
         splited : false,
-        currentMark : 'none',})
-    const taskData = data;
+        currentMark : '',
+    }) );
 
     const setTaskChecked = (id : string) => {
         const taskData = [...data];
@@ -23,12 +26,17 @@ const App = function() {
         setData(taskData);
     };
 
+    const changeOptions = (newOptions : options) => {
+        setOptionsData(newOptions);
+    };
+
     return (
-        <>
+        <div className='TaskListApp'>
             <h1>ToDo List</h1>
-            <TaskList tasks={taskData} viewOptions={getOptions()} setTaskChecked={setTaskChecked} />
+            <TaskListFilter options={optionsData} changeOptions={changeOptions} />
+            <TaskList tasks={data} viewOptions={optionsData} setTaskChecked={setTaskChecked} />
             <TaskAddForm />
-        </>
+        </div>
     )
 }
 
