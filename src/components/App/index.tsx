@@ -12,12 +12,18 @@ const App = function() {
         {text : 'You spin me ...', id : '3', complete : false, mark : 'none'},
         {text : 'Right now, baby right now', id : '4', complete : true, mark : 'red'},
     ]) );
-
     const [optionsData, setOptionsData] = useState( () : options =>({
         showCompleted: false,
         splited : false,
         currentMark : '',
     }) );
+
+    const computeID = () => {
+        const sortedByIdTasks = [...data].sort((a,b) => Number(b.id) - Number(a.id));
+        return `${Number(sortedByIdTasks[0]) + 1}`
+    };
+
+    const [currentID, changeCurrentId] = useState(() => computeID() );
 
     const setTaskChecked = (id : string) => {
         const taskData = [...data];
@@ -30,12 +36,25 @@ const App = function() {
         setOptionsData(newOptions);
     };
 
+    const addTask = (newTask : taskType) => {
+        changeCurrentId( (id) => `${Number(id) + 1}` );
+        const newTaskData = [...data, newTask];
+        setData(newTaskData);
+    };
+
+    const editTask = (newTask : taskType) => {
+        const taskData = [...data];
+        const targetElementIndex = taskData.findIndex( (item) => item.id === newTask.id );
+        if (targetElementIndex !== -1) taskData[targetElementIndex] = newTask;
+        setData(taskData);
+    };
+
     return (
         <div className='TaskListApp'>
             <h1>ToDo List</h1>
             <TaskListFilter options={optionsData} changeOptions={changeOptions} />
-            <TaskList tasks={data} viewOptions={optionsData} setTaskChecked={setTaskChecked} />
-            <TaskAddForm />
+            <TaskList tasks={data} viewOptions={optionsData} setTaskChecked={setTaskChecked} editTask={editTask} />
+            <TaskAddForm currentId={currentID} addTask={addTask} />
         </div>
     )
 }

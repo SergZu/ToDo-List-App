@@ -16,10 +16,24 @@ export interface taskType {
 export interface TaskElementType {
     data : taskType;
     onChangeHandler : React.ChangeEventHandler;
+    onEditTask : (newTask : taskType) => void;
 }
 
 export interface TaskListProps {
     tasks : taskType[] | [];
     viewOptions : options;
     setTaskChecked : (id : string) => void;
+    editTask : (newTask : taskType) => void;
 } 
+
+export interface EditTaskProps {
+    data : taskType;
+    onSubmitTaskHandler : (newTask : taskType) => void;
+    target : 'add' | 'edit';
+    stopEdit? : () => void;
+}
+
+export interface TaskAddFormProps {
+    currentId : string;
+    addTask : (newTask : taskType) => void;
+}

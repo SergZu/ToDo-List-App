@@ -23,7 +23,7 @@ const TaskListFilter = function(props : FilterProps) {
         changeOptions(newOptions);
     };
 
-    const changeMarkFilter = (evt : React.ChangeEvent<HTMLInputElement>) => {
+    const changeMarkFilter : React.ChangeEventHandler<HTMLInputElement> = (evt) => {
         let newOptions = {...options};
         newOptions.currentMark = evt.currentTarget.value as mark;
         changeOptions(newOptions);
@@ -42,7 +42,6 @@ const TaskListFilter = function(props : FilterProps) {
                 <label className='TaskListFilter-mark:blue'><input type='radio' value='blue' checked={options.currentMark === 'blue'} onChange={changeMarkFilter} />Blue</label>
                 <label className='TaskListFilter-mark:green'><input type='radio' value='green' checked={options.currentMark === 'green'} onChange={changeMarkFilter} />Green</label>
                 <label className='TaskListFilter-mark:none'><input type='radio' value='none' checked={options.currentMark === 'none'} onChange={changeMarkFilter} />Unmarked</label>
-                <option value='' className='TaskListFilter-marks__red'></option>
             </div>
         </form>
     )
