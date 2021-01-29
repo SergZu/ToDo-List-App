@@ -3,7 +3,6 @@ import { taskType, options, TaskElementType, TaskListProps } from '../types';
 import './style.scss';
 
 const Task = function(props : TaskElementType) {
-    //const [completed, setTaskComplete] = useState(props.data.complete);
 
     const { id, text, complete, mark} = props.data;
     
@@ -24,7 +23,6 @@ const TaskList = function(props : TaskListProps) {
 
     const createList = (taskData : taskType[] | [], options : options) => {
         let targetArray = [...taskData];
-        console.log(options);
         if (options.currentMark !== 'none') {
             targetArray = taskData.filter((item) => item.mark === options.currentMark );
         };
@@ -33,7 +31,6 @@ const TaskList = function(props : TaskListProps) {
         };
         if (!options.showCompleted) {
             targetArray = targetArray.filter((item) => !item.complete);
-            console.log(targetArray);
         };
         const result = targetArray.map((item) => (<li key={item.id}><Task data={{ id : item.id, text : item.text, mark : item.mark, complete : item.complete  }} 
             onChangeHandler={onChangeHandler} /></li>) );
