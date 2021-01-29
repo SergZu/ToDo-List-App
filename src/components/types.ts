@@ -15,8 +15,7 @@ export interface taskType {
 
 export interface TaskElementType {
     data : taskType;
-    completeTaskClickHandler : (target : Element) => void;
-    setTaskChecked : (id : string) => void;
+    onChangeHandler : React.ChangeEventHandler;
 }
 
 export interface TaskListProps {
