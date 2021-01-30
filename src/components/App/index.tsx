@@ -4,15 +4,11 @@ import TaskAddForm from '../TaskAddForm';
 import TaskListFilter from '../TaskListFilter';
 import { options, taskType } from '../types';
 import './style.scss';
+import { pushToStorage, getFromStorage } from '../../storageUtils';
 
 const App = function() {
 
-    const [data, setData] = useState( () : taskType[] =>([
-        {text : 'Do anything', id : '1', complete : false, mark : 'none'},
-        {text : 'Do anything else', id : '2', complete : true, mark : 'blue'},
-        {text : 'You spin me ...', id : '3', complete : false, mark : 'none'},
-        {text : 'Right now, baby right now', id : '4', complete : true, mark : 'red'},
-    ]) );
+    const [data , setData] = useState( getFromStorage() );
     const [optionsData, setOptionsData] = useState( () : options =>({
         showCompleted: false,
         splited : false,
@@ -20,6 +16,7 @@ const App = function() {
     }) );
 
     const computeID = () => {
+        if (data.length === 0) return '1';
         const sortedByIdTasks = [...data].sort((a,b) => Number(b.id) - Number(a.id));
         return `${Number(sortedByIdTasks[0].id) + 1}`
     };
@@ -31,6 +28,7 @@ const App = function() {
         const targetElement = taskData.find( (item) => item.id === id );
         if (targetElement !== undefined) targetElement.complete = !targetElement.complete; 
         setData(taskData);
+        pushToStorage(taskData);
     };
 
     const changeOptions = (newOptions : options) => {
@@ -38,8 +36,9 @@ const App = function() {
     };
 
     const addTask = (newTask : taskType) => {
-        const newTaskData = [...data, newTask];
-        setData(newTaskData);
+        const taskData = [...data, newTask];
+        setData(taskData);
+        pushToStorage(taskData);
     };
 
     const editTask = (newTask : taskType) => {
@@ -47,6 +46,7 @@ const App = function() {
         const targetElementIndex = taskData.findIndex( (item) => item.id === newTask.id );
         if (targetElementIndex !== -1) taskData[targetElementIndex] = newTask;
         setData(taskData);
+        pushToStorage(taskData);
     };
 
     const deleteTask = (id : string) => {
@@ -54,11 +54,13 @@ const App = function() {
         const targetElementIndex = taskData.findIndex( (item) => item.id === id );
         if (targetElementIndex !== -1) taskData.splice(targetElementIndex, 1);
         setData(taskData);
+        pushToStorage(taskData);
     }; 
 
     const purgeAllCompleted = () => {
-        const newData = [...data].filter((item) => !item.complete);
-        setData(newData);
+        const taskData = [...data].filter((item) => !item.complete);
+        setData(taskData);
+        pushToStorage(taskData);
     };
 
     return (
