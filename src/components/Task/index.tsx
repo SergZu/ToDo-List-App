@@ -11,7 +11,7 @@ import './style.scss';
         toggleEdit((editFlag) => !editFlag)
     }; 
 
-    const layout = isEdit ? (<EditTask data={props.data} target='edit' onSubmitTaskHandler={props.onEditTask} stopEdit={toggleEditMode} />) 
+    const layout = isEdit ? (<EditTask data={props.data} onSubmitTaskHandler={props.onEditTask} stopEdit={toggleEditMode} deleteTask={props.deleteTask} />) 
         : (<div className='task' id={id}>
               <div className='task-mark' data-color={mark}></div>
               <div className='task-text'>{text}</div>

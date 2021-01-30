@@ -36,7 +36,7 @@ const TaskList = function(props : TaskListProps) {
             targetArray = targetArray.filter((item) => !item.complete);
         };
         const result = targetArray.map((item) => (<li key={item.id}><Task data={{ id : item.id, text : item.text, mark : item.mark, complete : item.complete  }} 
-            onChangeHandler={onChangeHandler} onEditTask={props.editTask} /></li>) );
+            onChangeHandler={onChangeHandler} onEditTask={props.editTask} deleteTask={props.deleteTask} /></li>) );
         return result
     };
 

@@ -11,7 +11,7 @@ const TaskAddForm = function(props : TaskAddFormProps){
     };
     return (
         <>
-            <EditTask data={taskInit} onSubmitTaskHandler={props.addTask} target='add' />
+            <EditTask data={taskInit} onSubmitTaskHandler={props.addTask} deleteTask={props.deleteTask} />
         </>
     )
 };

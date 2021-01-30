@@ -17,6 +17,7 @@ export interface TaskElementType {
     data : taskType;
     onChangeHandler : React.ChangeEventHandler;
     onEditTask : (newTask : taskType) => void;
+    deleteTask : (id : string) => void;
 }
 
 export interface TaskListProps {
@@ -24,6 +25,7 @@ export interface TaskListProps {
     viewOptions : options;
     setTaskChecked : (id : string) => void;
     editTask : (newTask : taskType) => void;
+    deleteTask : (id : string) => void;
 } 
 
 export interface FilterProps {
@@ -35,12 +37,12 @@ export interface FilterProps {
 export interface EditTaskProps {
     data : taskType;
     onSubmitTaskHandler : (newTask : taskType) => void;
-    target : 'add' | 'edit';
     stopEdit? : () => void;
-
+    deleteTask : (id : string) => void;
 }
 
 export interface TaskAddFormProps {
     currentId : string;
     addTask : (newTask : taskType) => void;
+    deleteTask : (id : string) => void;
 }

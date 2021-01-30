@@ -49,6 +49,13 @@ const App = function() {
         setData(taskData);
     };
 
+    const deleteTask = (id : string) => {
+        const taskData = [...data];
+        const targetElementIndex = taskData.findIndex( (item) => item.id === id );
+        if (targetElementIndex !== -1) taskData.splice(targetElementIndex, 1);
+        setData(taskData);
+    }; 
+
     const purgeAllCompleted = () => {
         const newData = [...data].filter((item) => !item.complete);
         setData(newData);
@@ -58,8 +65,8 @@ const App = function() {
         <div className='TaskListApp'>
             <h1>ToDo List</h1>
             <TaskListFilter options={optionsData} changeOptions={changeOptions} deleteCompleted={purgeAllCompleted} />
-            <TaskList tasks={data} viewOptions={optionsData} setTaskChecked={setTaskChecked} editTask={editTask} />
-            <TaskAddForm currentId={currentId} addTask={addTask} />
+            <TaskList tasks={data} viewOptions={optionsData} setTaskChecked={setTaskChecked} editTask={editTask} deleteTask={deleteTask} />
+            <TaskAddForm currentId={currentId} addTask={addTask} deleteTask={deleteTask} />
         </div>
     )
 }
