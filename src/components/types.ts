@@ -26,6 +26,12 @@ export interface TaskListProps {
     editTask : (newTask : taskType) => void;
 } 
 
+export interface FilterProps {
+    options : options;
+    changeOptions : (newOption : options) => void;
+    deleteCompleted : () => void;
+}
+
 export interface EditTaskProps {
     data : taskType;
     onSubmitTaskHandler : (newTask : taskType) => void;

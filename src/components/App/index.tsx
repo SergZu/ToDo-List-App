@@ -3,6 +3,7 @@ import TaskList from '../TaskList';
 import TaskAddForm from '../TaskAddForm';
 import TaskListFilter from '../TaskListFilter';
 import { options, taskType } from '../types';
+import './style.scss';
 
 const App = function() {
 
@@ -48,10 +49,15 @@ const App = function() {
         setData(taskData);
     };
 
+    const purgeAllCompleted = () => {
+        const newData = [...data].filter((item) => !item.complete);
+        setData(newData);
+    };
+
     return (
         <div className='TaskListApp'>
             <h1>ToDo List</h1>
-            <TaskListFilter options={optionsData} changeOptions={changeOptions} />
+            <TaskListFilter options={optionsData} changeOptions={changeOptions} deleteCompleted={purgeAllCompleted} />
             <TaskList tasks={data} viewOptions={optionsData} setTaskChecked={setTaskChecked} editTask={editTask} />
             <TaskAddForm currentId={currentId} addTask={addTask} />
         </div>

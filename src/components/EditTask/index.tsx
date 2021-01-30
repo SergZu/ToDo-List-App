@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { taskType, mark, EditTaskProps } from '../types';
+import './style.scss';
 
 const EditTask = function(props : EditTaskProps) {
     const { text, id, mark, complete } = props.data;

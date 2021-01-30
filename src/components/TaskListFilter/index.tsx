@@ -1,11 +1,6 @@
 import React from 'react';
 import './style.scss';
-import { options, mark } from '../types';
-
-interface FilterProps {
-    options : options;
-    changeOptions : (newOption : options) => void;
-}
+import { mark, FilterProps } from '../types';
 
 const TaskListFilter = function(props : FilterProps) {
 
@@ -43,6 +38,7 @@ const TaskListFilter = function(props : FilterProps) {
                 <label className='TaskListFilter-mark:green'><input type='radio' value='green' checked={options.currentMark === 'green'} onChange={changeMarkFilter} />Green</label>
                 <label className='TaskListFilter-mark:none'><input type='radio' value='none' checked={options.currentMark === 'none'} onChange={changeMarkFilter} />Unmarked</label>
             </div>
+            <button className='TaskListFilter-btn:delete' onClick={props.deleteCompleted} >Delete all completed</button>
         </form>
     )
 }
