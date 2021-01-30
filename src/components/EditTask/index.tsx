@@ -19,17 +19,16 @@ const EditTask = function(props : EditTaskProps) {
     };
 
     const submitTask : React.FormEventHandler = (evt) => {
-        evt.preventDefault();
         props.onSubmitTaskHandler(taskData);
         if (props?.stopEdit) {
             props.stopEdit();
         }
         else {
-            const { text, id, mark, complete } = props.data;
+            const id = `${Number(taskData.id) + 1}`;
+            const { text, mark, complete } = props.data;
             changeTaskData({ text, id, mark, complete });
         }
     }
-
     return (
         <div className='task-editable'>
             <textarea value={taskData.text} onChange={onChangeTextHandler} />
@@ -40,7 +39,7 @@ const EditTask = function(props : EditTaskProps) {
                 <label className='TaskListFilter-mark:green'><input type='radio' value='green' checked={taskData.mark === 'green'} onChange={onChangeMarkHandler} />Green</label>
                 <label className='TaskListFilter-mark:none'><input type='radio' value='none' checked={taskData.mark === 'none'} onChange={onChangeMarkHandler} />Unmarked</label>
             </div>
-            <input type='submit' className='task-btn__apply' onSubmit={submitTask} />
+            <input type='button' className='task-btn__apply' onClick={submitTask} value='Complete' />
         </div>
     )
 }

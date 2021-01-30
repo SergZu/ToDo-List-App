@@ -31,6 +31,7 @@ export interface EditTaskProps {
     onSubmitTaskHandler : (newTask : taskType) => void;
     target : 'add' | 'edit';
     stopEdit? : () => void;
+
 }
 
 export interface TaskAddFormProps {

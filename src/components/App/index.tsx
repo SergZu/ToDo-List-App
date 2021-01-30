@@ -20,10 +20,10 @@ const App = function() {
 
     const computeID = () => {
         const sortedByIdTasks = [...data].sort((a,b) => Number(b.id) - Number(a.id));
-        return `${Number(sortedByIdTasks[0]) + 1}`
+        return `${Number(sortedByIdTasks[0].id) + 1}`
     };
 
-    const [currentID, changeCurrentId] = useState(() => computeID() );
+    const currentId = computeID();
 
     const setTaskChecked = (id : string) => {
         const taskData = [...data];
@@ -37,7 +37,6 @@ const App = function() {
     };
 
     const addTask = (newTask : taskType) => {
-        changeCurrentId( (id) => `${Number(id) + 1}` );
         const newTaskData = [...data, newTask];
         setData(newTaskData);
     };
@@ -54,7 +53,7 @@ const App = function() {
             <h1>ToDo List</h1>
             <TaskListFilter options={optionsData} changeOptions={changeOptions} />
             <TaskList tasks={data} viewOptions={optionsData} setTaskChecked={setTaskChecked} editTask={editTask} />
-            <TaskAddForm currentId={currentID} addTask={addTask} />
+            <TaskAddForm currentId={currentId} addTask={addTask} />
         </div>
     )
 }
