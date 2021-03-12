@@ -1,51 +1,34 @@
 import React from 'react';
-import { taskType, options, TaskListProps } from '../types';
-import Task from '../Task';
-import './style.scss';
+import TaskListTitle from '../TaskListTitle';
+import TaskListContent from '../TaskListContent';
+import { TaskListProps } from '../types';
+import './styles.scss';
 
 
 
 const TaskList = function(props : TaskListProps) {
-    const markPriorities = {
-        red : 0,
-        black : 1,
-        blue : 2,
-        green : 3,
-        none : 4,
+    const {tasks, currentFilter, editTask, addTask, deleteTask, currentDate, searchQuery, makeQuery, setTaskChecked, showCompleted} = props;
+    const computeID = () => {
+        if (tasks.length === 0) return '1';
+        const sortedByIdTasks = [...tasks].sort((a,b) => Number(b.id) - Number(a.id));
+        return `${Number(sortedByIdTasks[0].id) + 1}`
     };
-    
-    const onChangeHandler : React.ChangeEventHandler = (evt) => {
-        const target  = evt.target.closest('.task');
-        if (target !== null) props.setTaskChecked(target.id);
-    };
-
-    const createList = (taskData : taskType[] | [], options : options) => {
-        let targetArray = [...taskData];
-
-        if (options.currentMark !== '') {
-            targetArray = taskData.filter((item) => item.mark === options.currentMark );
-        };
-        if (options.splited) {
-            targetArray.sort((a,b) => {
-                const itemA = markPriorities[a.mark];
-                const itemB = markPriorities[b.mark];
-                return itemA - itemB; 
-            });
-        };
-        if (!options.showCompleted) {
-            targetArray = targetArray.filter((item) => !item.complete);
-        };
-        const result = targetArray.map((item) => (<li key={item.id}><Task data={{ id : item.id, text : item.text, mark : item.mark, complete : item.complete  }} 
-            onChangeHandler={onChangeHandler} onEditTask={props.editTask} deleteTask={props.deleteTask} /></li>) );
-        return result
-    };
-
-    const layout = (props.tasks.length === 0) ? (<div className='tasklist-placeholder'>Add your first task</div>) : createList(props.tasks, props.viewOptions);
-
+    const createCategoryList = () : string[] | [] => {
+        if (tasks.length === 0) return [];
+        let result : Set<string> = new Set();
+        const tempTaskArray = [...tasks];
+        tempTaskArray.forEach( (item) => {result.add(item.category)} );
+        return [...result]
+    }
+    const nextId = computeID();
+    const categories = createCategoryList();
     return (
-        <ul className='tasklist'>
-            {layout}
-        </ul>
+        <main className='TaskList'>
+            <TaskListTitle currentFilter={currentFilter} currentDate={currentDate} searchQuery={searchQuery} 
+                makeQuery={makeQuery} addTask={addTask} nextId={nextId} />
+            <TaskListContent tasks={tasks} categories={categories} currentFilter={currentFilter} showCompleted={showCompleted}
+                editTask={editTask} deleteTask={deleteTask} setTaskChecked={setTaskChecked} searchQuery={searchQuery}  currentDate={currentDate} />
+        </main>
     )
 };
 

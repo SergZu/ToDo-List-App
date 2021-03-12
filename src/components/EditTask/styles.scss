@@ -1,0 +1,113 @@
+.task-editable {
+    border-top: 1px solid #aaa;
+    padding: 0.5rem 0;
+    grid-column-start: 1;
+    grid-column-end: -1;
+    display: grid;
+    min-height: fit-content;
+    grid-template: 'mode mode im_flag im_flag'
+                   'text text text text'
+                   'schedule schedule schedule schedule'
+                   'category category category category'
+                   'cancel cancel apply apply';
+    gap: 0.5rem;
+    box-shadow: 0 -1px 1px #777;
+}
+
+.taskEdit-mode {
+    grid-area: mode;
+    margin: auto;
+    text-transform: uppercase;
+}
+
+.taskEdit-text {
+    grid-area: text;
+    padding: 1rem 0;
+    margin: 0 2.5%;
+    border: 1px solid #222;
+    border-radius: 10px;
+    &::placeholder {
+        color:#111;
+        font-style: italic;
+        text-align: center;
+    }
+}
+
+.invalid {
+    border: 2px solid rgb(112, 3, 3);
+    border-radius: 5px;
+    &::placeholder {
+        color:rgb(112, 3, 3);
+        font-weight: bold;
+        text-align: center;
+    }
+}
+
+.taskEdit-btn__important {
+    margin: auto;
+    grid-area: im_flag;
+    height: 1.5rem;
+    width: 1.5rem;
+    color: transparent;
+    background: url('../../icons/star.png') center no-repeat;
+    background-size: contain;
+    box-shadow: 0 0 1px #aaa;
+}
+
+.highlight {
+    background-image: url('../../icons/star-filled.png');
+}
+
+.taskEdit-expired {
+    grid-area: schedule;
+    margin: auto;
+    text-align: center;
+}
+
+.taskEdit-btn__schedule {
+    grid-area: schedule;
+    margin: 0 25%;
+    padding: 0.25rem 0;
+    text-transform: uppercase;
+    color: #222;
+    font-weight: bold;
+    font-family: Verdana, Tahoma, sans-serif;
+    background-color: #eee;
+    border: 1px solid #111;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgb(238, 247, 214);
+}
+
+.taskEdit-category {
+    grid-area: category;
+    margin: 0 2.5%;
+    padding: 0.25rem 0;
+    border: 1px solid #777;
+    border-radius: 5px;
+    &::placeholder {
+        text-align: center;
+        font-style: italic;
+    }
+}
+
+.taskEdit-btn__cancel {
+    grid-area: cancel;
+    margin: auto;
+    width: 2.5rem;
+    height: 2.5rem;
+    background : url('../../icons/cancel.png') #aaa center no-repeat;
+    background-size: contain;
+    border: 1px transparent;
+    border-radius: 50%;
+}
+
+.taskEdit-btn__apply {
+    grid-area: apply;
+    margin: auto;
+    width: 2.5rem;
+    height: 2.5rem;
+    background : url('../../icons/accept.svg') #aaa center no-repeat;
+    background-size: contain;
+    border: 1px transparent;
+    border-radius: 50%;
+}

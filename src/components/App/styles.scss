@@ -1,0 +1,9 @@
+$darkGray : #333;
+$tightWhite : #ddd;
+
+.TaskListApp {
+    width: 100%;
+    min-height: 100vh;
+    background-color: $darkGray;
+    color: $tightWhite;
+}

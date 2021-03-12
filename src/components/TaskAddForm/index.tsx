@@ -1,22 +1,24 @@
 import React from 'react';
 import EditTask from '../EditTask';
-import { taskType, TaskAddFormProps } from '../types';
+import { TaskAddFormProps } from '../types';
 
-const TaskAddForm = function(props : TaskAddFormProps){
-    const taskInit : taskType = {
-        id : props.currentId,
+const TaskAddForm = function(props : TaskAddFormProps) {
+    const { nextId, addTask, toggleMode, currentDate } = props;
+    const initTask = (id : string) => ({
+        id,
         text : '',
-        mark : 'none',
-        complete : false
-    };
+        complete : false,
+        category : '',
+        important : false,
+        expiredDate : ''
+    });
     return (
         <>
-            <EditTask data={taskInit} onSubmitTaskHandler={props.addTask} deleteTask={props.deleteTask} />
+            <EditTask task={ initTask(nextId) } addTask={addTask} toggleMode={toggleMode} currentDate={currentDate} />   
         </>
     )
-};
+}
 
-export default TaskAddForm;
-
+export default TaskAddForm
 
  

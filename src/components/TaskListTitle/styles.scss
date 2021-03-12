@@ -1,0 +1,62 @@
+.TaskListTitle {
+    margin: 0 0 0 25%;
+    height: 25vh;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0.5rem;
+    transition: height ease 0.25s;
+}
+
+.open { 
+    height: 50vh;
+    grid-template-rows: 1fr 3fr;
+}
+
+
+.TaskListTitle-name {
+    font: bold 1.5rem/1.5 Garamond, Helvetica, sans-serif;
+    text-transform: uppercase;
+    color: hsl(46, 80%, 49%);
+    text-shadow: -1px 1px 0 hsla(46, 80%, 47%, 0.5),
+    -2px 2px 0 hsla(46, 80%, 47%, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.TaskListTitle-time {
+    margin: auto 5%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font: bold 3vw/1.5 Courier, monospace;
+    background-color: #111;
+    border: 1px solid #111;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px #ccc,
+    -1px -1px 1px #ccc;
+}
+
+.TaskListTitle-search {
+    border-radius: 7px;
+    margin: 0.25rem auto;
+    &::placeholder {
+        text-align: center;
+        font-style: italic;
+    }
+}
+
+.TaskListTitle-add {
+    text-transform: uppercase;
+    margin: 0.25rem auto;
+    font-size: 0.75rem;
+    font-weight: bold;
+    background-color: rgb(39, 99, 62);
+    border: 2px solid rgba(39, 99, 62, 0.25);
+    border-radius: 5px;
+    color: #ccc;
+    text-shadow: 0 0 5px #fff;
+}

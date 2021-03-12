@@ -1,0 +1,93 @@
+%filter-checkbox {
+    content: '';
+    display: inline-block;
+    vertical-align: sub;
+    width: 0.75rem;
+    height: 0.75rem;
+    margin: 0 3px;
+    border: 2px solid #777;
+    border-radius: 2px;
+}
+
+%filter-checkbox__checked {
+    @extend %filter-checkbox;
+    box-shadow: 1px 1px 1px #111 inset,
+        -1px -1px 1px #111 inset,
+        5px 5px 5px #ccc inset,
+        -5px -5px 5px #ccc inset;
+}
+
+.TaskListFilter {
+    font: bold 0.65rem/1 Georgia, sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    position: fixed;
+    display: flex;
+    width: 25%;
+    height: 100vh;
+    max-height: 100vh;
+    border-right: 3px solid #000;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #111;
+    color: #ccc;
+}
+
+.TaskListFilter-item {
+    padding: 1.5rem 0;
+    border: 1px solid transparent;
+    border-radius: 7.5%;
+    width: 100%;
+    text-align: center;
+    @media screen and (max-height: 500px){
+        padding: 0.5rem 0;
+    }
+}
+
+.active {
+    background-color: #fff;
+    color: rgb(61, 124, 10);
+    box-shadow: 0 0 2px #666;
+}
+
+.TaskListFilter-completed {
+    padding: 1.5rem 0;
+    width: 100%;
+    display: block;
+    font-size: 0.5rem;
+    border-top: 2px solid #000;
+    text-align: center;
+    input {
+        display: none;
+    }
+    span::before {
+        @extend %filter-checkbox; 
+    }
+    span {
+        display: inline-block;
+        margin: 0 auto;
+    }
+}
+
+.checked {
+    span::before {
+        @extend %filter-checkbox__checked;
+    }
+}
+
+.TaskListFilter-btn__delete {
+    margin-top: 2rem;
+    padding: 0.5rem 0;
+    width: 95%;
+    font-size: 0.65rem;
+    color: #111;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: 1px solid rgb(187, 107, 32);
+    border-radius: 10px;
+    background-color: rgb(187, 107, 32);
+    &:active {
+        filter: saturate(300%);
+    }
+}

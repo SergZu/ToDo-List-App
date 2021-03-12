@@ -1,56 +1,86 @@
 import React, {useState} from 'react';
-import { taskType, mark, EditTaskProps } from '../types';
-import './style.scss';
+import { EditTaskProps } from '../types';
+import {convertDate} from '../../dateUtils';
+import './styles.scss';
 
 const EditTask = function(props : EditTaskProps) {
-    const { text, id, mark, complete } = props.data;
-    
-    const [ taskData, changeTaskData ] = useState( () : taskType => ({text, id, mark, complete}) );
+    const { task, toggleMode, currentDate } = props;
+    const [ taskData, changeTaskData ] = useState( () => ({...task}) );
+    const [ scheduled, scheduleTask ] = useState( () => !(taskData.expiredDate === '') );
+    const [ taskTextError, setTaskError] = useState(false);
 
-    const onChangeTextHandler : React.ChangeEventHandler<HTMLTextAreaElement> = (evt) => {
+     const onChangeTextHandler : React.ChangeEventHandler<HTMLTextAreaElement> = (evt) => {
+        setTaskError(false); 
         const newData = {...taskData};
-        newData.text = evt.target.value;
+        newData.text = evt.currentTarget.value;
         changeTaskData(newData);
     };
 
-    const onChangeMarkHandler : React.ChangeEventHandler<HTMLInputElement> = (evt) => {
+    const onImportantClickHandler : React.MouseEventHandler = () => {
         const newData = {...taskData};
-        newData.mark = evt.target.value as mark;
+        newData.important = !taskData.important; 
         changeTaskData(newData);
     };
 
-    const submitTask : React.FormEventHandler = (evt) => {
-        props.onSubmitTaskHandler(taskData);
-        if (props?.stopEdit) {
-            props.stopEdit();
-        }
-        else {
-            const id = `${Number(taskData.id) + 1}`;
-            const { text, mark, complete } = props.data;
-            changeTaskData({ text, id, mark, complete });
-        }
+    const onDateChangeHandler : React.ChangeEventHandler<HTMLInputElement> = (evt) => {
+        const target = new Date(evt.currentTarget.value);
+        if (Number(currentDate) - Number(target) >= 0) return;
+        const newData = {...taskData};
+        newData.expiredDate = Number(target);
+        changeTaskData(newData);  
     };
 
-    const deleteTask : React.FormEventHandler = (evt) => {
-        props.deleteTask(taskData.id);
-        if (!props?.stopEdit) {
-            const { text, id, mark, complete } = props.data;
-            changeTaskData({ text, id, mark, complete });
-        };
-    }; 
+    const onChangeCategoryHandler : React.ChangeEventHandler<HTMLInputElement> = (evt) => {
+        const newData = {...taskData};
+        newData.category = evt.currentTarget.value; 
+        changeTaskData(newData);
+    };
+
+    const submitTask = () => {
+        if (taskData.text.trim().length === 0) {
+            setTaskError(true);
+            return
+        }
+        if (!!props.addTask) {
+            props.addTask(taskData);
+        }
+        if (!!props.editTask) {
+            props.editTask(taskData);
+        }
+        toggleMode();
+    };
+
+    const cancelTask = () => {
+        toggleMode();
+    };
+
+    const onScheduleTask = () => {
+        scheduleTask((item) => !item);
+    };
+
+    const dataInputValue = taskData.expiredDate !== '' ? convertDate(taskData.expiredDate as number) : '';
+    console.log(`Expired Date : ${taskData.expiredDate}`)
+    const categoryInputValue = taskData.category !== '' ? taskData.category : '';
+    const importantBtnClass = taskData.important ? 'taskEdit-btn__important highlight' : 'taskEdit-btn__important';
+    const taskTextareaClass = taskTextError ? 'taskEdit-text invalid' : 'taskEdit-text';
+    const expiredDateLayout = scheduled ? 
+        (<label className='taskEdit-expired'>Expired date : 
+            <input type='datetime-local' value={dataInputValue} onChange={onDateChangeHandler} min={convertDate(Number(currentDate))} />
+         </label>) 
+         : (<input type='button' className='taskEdit-btn__schedule' onClick={onScheduleTask} value='Schedule' />);
+
     return (
-        <div className='task-editable'>
-            <textarea value={taskData.text} onChange={onChangeTextHandler} />
-            <div className='task-marks'>Current mark :
-                <label className='TaskListFilter-mark:red'><input type='radio' value='red' checked={taskData.mark === 'red'} onChange={onChangeMarkHandler} />Red</label>
-                <label className='TaskListFilter-mark:black'><input type='radio' value='black' checked={taskData.mark === 'black'} onChange={onChangeMarkHandler} />Black</label>
-                <label className='TaskListFilter-mark:blue'><input type='radio' value='blue' checked={taskData.mark === 'blue'} onChange={onChangeMarkHandler} />Blue</label>
-                <label className='TaskListFilter-mark:green'><input type='radio' value='green' checked={taskData.mark === 'green'} onChange={onChangeMarkHandler} />Green</label>
-                <label className='TaskListFilter-mark:none'><input type='radio' value='none' checked={taskData.mark === 'none'} onChange={onChangeMarkHandler} />Unmarked</label>
-            </div>
-            <input type='button' className='task-btn__apply' onClick={submitTask} value='Complete' />
-            <input type='button' className='task-btn__delete' onClick={deleteTask} value='Delete' />
-        </div>
+        <form className='task-editable'>
+            <h3 className='taskEdit-mode'>{(!!props.addTask) ? 'Add task' : 'Edit task'}</h3>
+            <textarea className={taskTextareaClass} value={taskData.text} onChange={onChangeTextHandler} 
+            placeholder={taskTextError ? 'Please Enter Task Name' : 'Task text'} />
+            <input type='button' className={importantBtnClass} onClick={onImportantClickHandler} value='Important' />
+            {expiredDateLayout}
+            <input type='text' className='taskEdit-category' onChange={onChangeCategoryHandler} placeholder='Task category' 
+                value={categoryInputValue} />
+            <input type='button' className='taskEdit-btn__cancel' onClick={cancelTask} />
+            <input type='button' className='taskEdit-btn__apply' onClick={submitTask} />
+        </form>
     )
 }
 

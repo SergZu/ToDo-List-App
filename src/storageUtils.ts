@@ -5,7 +5,7 @@ export const pushToStorage = function(targetArray : taskType[] ) {
     localStorage.setItem('TasksList', data);
 };
 
-export const getFromStorage = function() {
+export const getFromStorage = function() : taskType[] | []  {
     let data = localStorage.getItem('TasksList');
     if (data === null) {
         pushToStorage([]);

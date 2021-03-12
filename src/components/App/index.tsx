@@ -1,39 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TaskList from '../TaskList';
-import TaskAddForm from '../TaskAddForm';
 import TaskListFilter from '../TaskListFilter';
-import { options, taskType } from '../types';
-import './style.scss';
+import { ListFilters, taskType } from '../types';
+import './styles.scss';
 import { pushToStorage, getFromStorage } from '../../storageUtils';
-
+/* TODO : 1.Create two-lined layout for task and change btns to icons 2.fix bugs, add keyboard event listeners and fix tabIndex  3.do media queries 4.do manifest and service worker for PWA */
 const App = function() {
 
-    const [data , setData] = useState( getFromStorage() );
-    const [optionsData, setOptionsData] = useState( () : options =>({
-        showCompleted: false,
-        splited : false,
-        currentMark : '',
-    }) );
+    const [data , setData] = useState(  getFromStorage() );
+    const [currentFilter, setFilter] = useState( () : ListFilters => 'All');
+    const [currentDate, setDate] = useState( () => ( new Date() ) );
+    const [searchQuery, setQuery] = useState('');
+    const [showCompleted, setViewCompleted] = useState(false);
 
-    const computeID = () => {
-        if (data.length === 0) return '1';
-        const sortedByIdTasks = [...data].sort((a,b) => Number(b.id) - Number(a.id));
-        return `${Number(sortedByIdTasks[0].id) + 1}`
+    let timerId : number;
+    
+    useEffect(() => {
+        const updateDate = () => {
+            setDate( new Date() );
+        };
+        timerId = window.setInterval(updateDate , 60000);
+        return () => {
+            clearInterval(timerId);
+        }
+    }, []);
+
+    const changeFilter = (newFilter : ListFilters) => {
+        setFilter(newFilter);
     };
 
-    const currentId = computeID();
-
-    const setTaskChecked = (id : string) => {
-        const taskData = [...data];
-        const targetElement = taskData.find( (item) => item.id === id );
-        if (targetElement !== undefined) targetElement.complete = !targetElement.complete; 
-        setData(taskData);
-        pushToStorage(taskData);
-    };
-
-    const changeOptions = (newOptions : options) => {
-        setOptionsData(newOptions);
-    };
+    const changeViewCompletedSetting = () => {
+        setViewCompleted( (option) => !option );
+    }
 
     const addTask = (newTask : taskType) => {
         const taskData = [...data, newTask];
@@ -55,20 +53,32 @@ const App = function() {
         if (targetElementIndex !== -1) taskData.splice(targetElementIndex, 1);
         setData(taskData);
         pushToStorage(taskData);
-    }; 
+    };
 
-    const purgeAllCompleted = () => {
+    const setTaskChecked = (id : string) => {
+        const taskData = [...data];
+        const targetElement = taskData.find( (item) => item.id === id );
+        if (targetElement !== undefined) targetElement.complete = !targetElement.complete; 
+        setData(taskData);
+        pushToStorage(taskData);
+    };
+
+    const deleteAllCompleted = () => {
         const taskData = [...data].filter((item) => !item.complete);
         setData(taskData);
         pushToStorage(taskData);
     };
 
+    const makeQuery = (newValue : string) => {
+        setQuery(newValue);
+    };
+
     return (
         <div className='TaskListApp'>
-            <h1>ToDo List</h1>
-            <TaskListFilter options={optionsData} changeOptions={changeOptions} deleteCompleted={purgeAllCompleted} />
-            <TaskList tasks={data} viewOptions={optionsData} setTaskChecked={setTaskChecked} editTask={editTask} deleteTask={deleteTask} />
-            <TaskAddForm currentId={currentId} addTask={addTask} deleteTask={deleteTask} />
+            <TaskListFilter currentFilter={currentFilter} changeFilter={changeFilter} deleteCompleted={deleteAllCompleted}
+            showCompleted={showCompleted} changeViewCompletedSetting={changeViewCompletedSetting} />
+            <TaskList tasks={data} currentFilter={currentFilter} editTask={editTask} addTask={addTask} deleteTask={deleteTask} 
+            currentDate={currentDate} searchQuery={searchQuery} makeQuery={makeQuery} setTaskChecked={setTaskChecked} showCompleted={showCompleted} />
         </div>
     )
 }

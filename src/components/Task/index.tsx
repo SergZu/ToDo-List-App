@@ -1,28 +1,39 @@
 import React, { useState } from 'react';
 import { TaskElementType } from '../types';
+import {computeTimeDiff} from '../../dateUtils';
 import EditTask from '../EditTask';
 import './style.scss';
 
     const Task = function(props : TaskElementType) {
-    const { id, text, complete, mark} = props.data;
-    const [ isEdit, toggleEdit ] = useState(false);
+    const [editMode, toggleEditMode] = useState(false);
 
-    const toggleEditMode = () => {
-        toggleEdit((editFlag) => !editFlag)
-    }; 
+    const { taskData, editTask, deleteTask, setTaskChecked, currentDate } = props;   
+    const { text, complete, important, id, expiredDate } = taskData;
+    const toggleMode = () => {toggleEditMode((e) => !e)};
+    const onCompleteHandler = () => { setTaskChecked(id) };
+    const onEditTaskHandler = () => { toggleMode() };
+    const onDeleteTaskHandler = () => { deleteTask(id) };
 
-    const layout = isEdit ? (<EditTask data={props.data} onSubmitTaskHandler={props.onEditTask} stopEdit={toggleEditMode} deleteTask={props.deleteTask} />) 
-        : (<div className='task' id={id}>
-              <div className='task-mark' data-color={mark}></div>
-              <div className='task-text'>{text}</div>
-              <label className='task-completed' ><input type='checkbox' className='task-checkbox' checked={complete} 
-                onChange={props.onChangeHandler} /></label>
-              <button className='task-btn__editmode' onClick={toggleEditMode}>Edit</button>
-          </div>);
-    
-    return (
-        <>
-        {layout}
+    const remainTime = expiredDate !== '' ? computeTimeDiff(Number(expiredDate)) : '';     
+    const importantFlagClass = important ? 'task-element-important' : 'task-element-common';
+
+    const editModeLayout = (
+            <EditTask toggleMode={toggleMode} currentDate={currentDate} task={taskData} editTask={editTask} />
+    );
+    const taskElementLayout = (
+                <div className='task-element'>
+                        <div className={importantFlagClass}></div>
+                        <input type='checkbox' checked={complete} onChange={onCompleteHandler} id={`taskElement-${id}`} />
+                        <label htmlFor={`taskElement-${id}`} className='task-element-text'>{text}</label>
+                        <span className='task-element-date' >{remainTime}</span>
+                        <button className='task-element-btn__edit' onClick={onEditTaskHandler}>Edit</button>
+                        <button className='task-element-btn__delete' onClick={onDeleteTaskHandler}>Delete</button>
+               </div>)
+
+    const resultLayout = editMode ? editModeLayout : taskElementLayout;
+
+    return (<>
+            {resultLayout}
         </>)
 };
 

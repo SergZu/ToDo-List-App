@@ -1,0 +1,59 @@
+.task-element {
+    margin: 0 0.5rem;
+    padding-bottom: 0.5rem;
+    max-width: 100%;
+    display: block;
+    
+}
+
+.task-element [type=checkbox] {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0.5rem;
+}
+
+%important-block {
+    margin: auto;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: transparent;   
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.task-element-important {
+    @extend %important-block;
+    background: url('../../icons/star-filled.png') center no-repeat;
+    background-size: contain;
+}
+
+.task-element-common {
+    @extend %important-block;    
+}
+
+
+
+.task-element-text {
+    margin: auto;
+    display: inline-block;
+    vertical-align: bottom;
+    font-size: 1.25rem;
+    [type=checkbox]:checked + & {
+        text-decoration: line-through;
+    }
+}
+
+.task-element-date {
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0.25rem;
+}
+
+.task-element-btn__edit {
+
+}
+
+.task-element-btn__delete {
+
+}

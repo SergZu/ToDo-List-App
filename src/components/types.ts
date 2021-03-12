@@ -1,48 +1,76 @@
-export type mark = 'none' | 'blue' | 'green' | 'red' | 'black' ;
-
-export interface options {
-    showCompleted: boolean;
-    splited : boolean;
-    currentMark : mark | '';
-}
+export type ListFilters = 'All' | 'Today' | 'Tomorrow' | 'Upcoming' | 'Anytime' | 'Important'  ;
 
 export interface taskType {
     id : string;
     text : string;
     complete : boolean;
-    mark : mark;
+    category : string;
+    important : boolean;
+    expiredDate : string|number;
 }
 
-export interface TaskElementType {
-    data : taskType;
-    onChangeHandler : React.ChangeEventHandler;
-    onEditTask : (newTask : taskType) => void;
+export interface TaskListTitleProps {
+    currentFilter : ListFilters;
+    currentDate : Date;
+    addTask : (newTask : taskType) => void;
+    searchQuery : string;
+    makeQuery : (newValue : string) => void;
+    nextId : string;
+}
+
+export interface TaskListContentProps {
+    tasks : taskType[] | [];
+    categories : string[] | [];
+    currentFilter : ListFilters;
+    showCompleted : boolean;
+    searchQuery : string;
+    currentDate : Date;
+    setTaskChecked : (newValue : string) => void;
+    editTask : (newTask : taskType) => void;
     deleteTask : (id : string) => void;
 }
+
 
 export interface TaskListProps {
     tasks : taskType[] | [];
-    viewOptions : options;
-    setTaskChecked : (id : string) => void;
+    currentFilter : ListFilters;
     editTask : (newTask : taskType) => void;
+    addTask : (newTask : taskType) => void;
     deleteTask : (id : string) => void;
+    currentDate : Date;
+    searchQuery : string;
+    makeQuery : (newValue : string) => void;
+    setTaskChecked : (newValue : string) => void;
+    showCompleted : boolean;
 } 
 
+export interface TaskAddFormProps {
+    nextId : string;
+    addTask : (newTask : taskType) => void;
+    toggleMode : () => void;
+    currentDate : Date;
+}
+
 export interface FilterProps {
-    options : options;
-    changeOptions : (newOption : options) => void;
+    currentFilter : ListFilters;
+    changeFilter : (newFilter : ListFilters) => void;
     deleteCompleted : () => void;
+    showCompleted : boolean;
+    changeViewCompletedSetting : () => void; 
 }
 
 export interface EditTaskProps {
-    data : taskType;
-    onSubmitTaskHandler : (newTask : taskType) => void;
-    stopEdit? : () => void;
-    deleteTask : (id : string) => void;
+    task : taskType;
+    currentDate : Date;
+    addTask? : (newTask : taskType) => void;
+    editTask? : (newTask : taskType) => void;
+    toggleMode : () => void;
 }
 
-export interface TaskAddFormProps {
-    currentId : string;
-    addTask : (newTask : taskType) => void;
+export interface TaskElementType {
+    taskData : taskType;
+    currentDate : Date;
+    setTaskChecked : (newValue : string) => void;
+    editTask : (newTask : taskType) => void;
     deleteTask : (id : string) => void;
 }
