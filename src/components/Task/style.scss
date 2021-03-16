@@ -1,21 +1,26 @@
+.hidden {
+    display: none;
+}
+
 .task-element {
-    margin: 0 0.5rem;
-    padding-bottom: 0.5rem;
+    margin: 0 .5rem;
+    padding-bottom: .5rem;
     max-width: 100%;
-    display: block;
-    
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    /*display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;*/
 }
 
 .task-element [type=checkbox] {
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0 0.5rem;
+    margin: 0 .5rem;
 }
 
+
 %important-block {
-    margin: auto;
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: text-bottom;
+    margin: 0 .5rem;
     background-color: transparent;   
     width: 1.5rem;
     height: 1.5rem;
@@ -34,9 +39,6 @@
 
 
 .task-element-text {
-    margin: auto;
-    display: inline-block;
-    vertical-align: bottom;
     font-size: 1.25rem;
     [type=checkbox]:checked + & {
         text-decoration: line-through;
@@ -45,15 +47,37 @@
 
 .task-element-date {
     display: inline-block;
+    vertical-align: baseline;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 0.25rem;
+    margin: 0 .5rem;
+}
+
+.task-elemen-btns {
+    display: flex;
+    justify-content: center;
+    margin: .75rem auto;
+}
+
+%task-element-btn {
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: .8rem;
+    margin: 0 .5rem;
+    border: 1px solid transparent;
+    border-radius: 5px;
 }
 
 .task-element-btn__edit {
-
+    background: #fff url('../../icons/edit.png') center no-repeat; 
+    background-size: contain;
+    @extend %task-element-btn;
+    
 }
 
 .task-element-btn__delete {
-
+    background: #fff url('../../icons/delete.png') center no-repeat;
+    background-size: contain;
+    @extend %task-element-btn;
 }

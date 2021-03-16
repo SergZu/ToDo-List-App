@@ -22,8 +22,8 @@ export const computeTimeDiff = (ms : number) => {
     const minute = 60000;
     const hour = 3600000;
     const day = 86400000;
-    if (diff < 0) return 'expired';
-    if (diff < hour) return `${Math.floor(diff / minute)} min`;
-    if ( (diff > hour) && (diff < day) ) return `${Math.floor(diff / hour)}h : ${Math.floor( (diff % hour) / minute )}m`;
-    return `${Math.floor(diff / day)} days`;
+    if (diff < 0) return 'Date expired';
+    if (diff < hour) return `${Math.floor(diff / minute)} min left`;
+    if ( (diff > hour) && (diff < day) ) return `${Math.floor(diff / hour)}h : ${Math.floor( (diff % hour) / minute )}m left`;
+    return `${Math.floor(diff / day)} days left`;
 };

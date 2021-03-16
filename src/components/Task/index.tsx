@@ -16,18 +16,21 @@ import './style.scss';
 
     const remainTime = expiredDate !== '' ? computeTimeDiff(Number(expiredDate)) : '';     
     const importantFlagClass = important ? 'task-element-important' : 'task-element-common';
+    const remainTimeblockClass = remainTime.length !== 0 ? 'task-element-date' : 'hidden';
 
     const editModeLayout = (
             <EditTask toggleMode={toggleMode} currentDate={currentDate} task={taskData} editTask={editTask} />
     );
     const taskElementLayout = (
                 <div className='task-element'>
-                        <div className={importantFlagClass}></div>
-                        <input type='checkbox' checked={complete} onChange={onCompleteHandler} id={`taskElement-${id}`} />
-                        <label htmlFor={`taskElement-${id}`} className='task-element-text'>{text}</label>
-                        <span className='task-element-date' >{remainTime}</span>
-                        <button className='task-element-btn__edit' onClick={onEditTaskHandler}>Edit</button>
-                        <button className='task-element-btn__delete' onClick={onDeleteTaskHandler}>Delete</button>
+                                <div className={importantFlagClass}></div>
+                                <input type='checkbox' checked={complete} onChange={onCompleteHandler} id={`taskElement-${id}`} />
+                                <label htmlFor={`taskElement-${id}`} className='task-element-text'>{text}</label>
+                                <span className={remainTimeblockClass}>{remainTime}</span>
+                                <div className='task-elemen-btns'>
+                                        <button className='task-element-btn__edit' onClick={onEditTaskHandler}></button>
+                                        <button className='task-element-btn__delete' onClick={onDeleteTaskHandler}></button>
+                                </div>
                </div>)
 
     const resultLayout = editMode ? editModeLayout : taskElementLayout;
