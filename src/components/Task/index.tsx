@@ -26,8 +26,8 @@ import './style.scss';
                                 <div className={importantFlagClass}></div>
                                 <input type='checkbox' checked={complete} onChange={onCompleteHandler} id={`taskElement-${id}`} />
                                 <label htmlFor={`taskElement-${id}`} className='task-element-text'>{text}</label>
-                                <span className={remainTimeblockClass}>{remainTime}</span>
                                 <div className='task-elemen-btns'>
+                                        <span className={remainTimeblockClass}>{remainTime}</span>
                                         <button className='task-element-btn__edit' onClick={onEditTaskHandler}></button>
                                         <button className='task-element-btn__delete' onClick={onDeleteTaskHandler}></button>
                                 </div>
