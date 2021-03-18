@@ -21,7 +21,7 @@ const TaskListContent = function(props : TaskListContentProps) {
         
         const filteredTasks = tasks.filter((item) => {
 
-            const searchRegExp = new RegExp(`^${searchQuery}`, 'gi');
+            const searchRegExp = new RegExp(`${searchQuery}`, 'gi');
             if (!searchRegExp.test(item.text)) return false
             
             if (item.complete && !showCompleted) return false;
