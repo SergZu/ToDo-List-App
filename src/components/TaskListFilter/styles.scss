@@ -40,6 +40,13 @@
     border-radius: 7.5%;
     width: 100%;
     text-align: center;
+    &:focus {
+        outline: none;
+        box-shadow: inset 0 0 10px rgb(184, 175, 50);
+    }
+    &:hover, &:active {
+        box-shadow: inset 0 0 10px rgb(184, 175, 50); 
+    }
     @media screen and (max-height: 500px){
         padding: 0.5rem 0;
     }
@@ -49,6 +56,12 @@
     background-color: #fff;
     color: rgb(61, 124, 10);
     box-shadow: 0 0 2px #666;
+    &:focus {
+        box-shadow: inset 0 0 10px rgb(211, 123, 9);
+    }   
+    &:hover, &:active {
+        box-shadow: inset 0 0 10px rgb(211, 123, 9); 
+    }
 }
 
 .TaskListFilter-completed {
@@ -67,6 +80,13 @@
     span {
         display: inline-block;
         margin: 0 auto;
+    }
+    &:focus {
+        outline: none;
+        box-shadow: inset 0 0 10px rgb(211, 123, 9);
+    }   
+    &:hover, &:active {
+        box-shadow: inset 0 0 10px rgb(211, 123, 9); 
     }
 }
 
@@ -89,5 +109,12 @@
     background-color: rgb(187, 107, 32);
     &:active {
         filter: saturate(300%);
+    }
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 10px rgb(212, 214, 112);
+    }   
+    &:hover {
+        box-shadow: 0 0 10px rgb(212, 214, 112); 
     }
 }

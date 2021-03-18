@@ -12,6 +12,17 @@
                    'cancel cancel apply apply';
     gap: 0.5rem;
     box-shadow: 0 -1px 1px #777;
+    & input,
+    & textarea {
+        
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgb(211, 123, 9);
+        }   
+        &:hover,:active {
+            box-shadow: 0 0 10px rgb(211, 123, 9); 
+        }
+    }
 }
 
 .taskEdit-mode {
@@ -90,24 +101,32 @@
     }
 }
 
-.taskEdit-btn__cancel {
-    grid-area: cancel;
+%taskEdit-btn {
     margin: auto;
     width: 2.5rem;
     height: 2.5rem;
-    background : url('../../icons/cancel.png') #aaa center no-repeat;
-    background-size: contain;
     border: 1px transparent;
     border-radius: 50%;
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 10px rgb(236, 207, 169);
+    }   
+    &:hover,:active {
+        box-shadow: 0 0 10px rgb(236, 207, 169); 
+    }
+}
+
+.taskEdit-btn__cancel {
+    @extend %taskEdit-btn;
+    grid-area: cancel;   
+    background : url('../../icons/cancel.png') #aaa center no-repeat;
+    background-size: contain;
 }
 
 .taskEdit-btn__apply {
+    @extend %taskEdit-btn;
     grid-area: apply;
-    margin: auto;
-    width: 2.5rem;
-    height: 2.5rem;
     background : url('../../icons/accept.svg') #aaa center no-repeat;
     background-size: contain;
-    border: 1px transparent;
-    border-radius: 50%;
+   
 }

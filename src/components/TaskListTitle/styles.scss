@@ -47,6 +47,13 @@
         text-align: center;
         font-style: italic;
     }
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 10px rgb(211, 123, 9);
+    }   
+    &:hover,:active {
+        box-shadow: 0 0 10px rgb(211, 123, 9); 
+    }
 }
 
 .TaskListTitle-add {
@@ -59,4 +66,14 @@
     border-radius: 5px;
     color: #ccc;
     text-shadow: 0 0 5px #fff;
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 10px rgb(93, 192, 131);
+    }   
+    &:hover {
+        box-shadow: 0 0 10px rgb(93, 192, 131);
+    }
+    &:active {
+        filter: saturate(300%); 
+    }
 }
