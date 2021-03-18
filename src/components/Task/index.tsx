@@ -11,6 +11,9 @@ import './style.scss';
     const { text, complete, important, id, expiredDate } = taskData;
     const toggleMode = () => {toggleEditMode((e) => !e)};
     const onCompleteHandler = () => { setTaskChecked(id) };
+    const onCompleteKeyPressHandler : React.KeyboardEventHandler = (evt) => {
+        if (evt.key === 'Enter') setTaskChecked(id)
+    }; 
     const onEditTaskHandler = () => { toggleMode() };
     const onDeleteTaskHandler = () => { deleteTask(id) };
 
@@ -24,7 +27,7 @@ import './style.scss';
     const taskElementLayout = (
                 <div className='task-element'>
                                 <div className={importantFlagClass}></div>
-                                <input type='checkbox' checked={complete} onChange={onCompleteHandler} id={`taskElement-${id}`} />
+                                <input type='checkbox' checked={complete} onChange={onCompleteHandler} id={`taskElement-${id}`} onKeyPress={onCompleteKeyPressHandler} />
                                 <label htmlFor={`taskElement-${id}`} className='task-element-text'>{text}</label>
                                 <div className='task-elemen-btns'>
                                         <span className={remainTimeblockClass}>{remainTime}</span>

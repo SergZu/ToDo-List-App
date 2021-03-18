@@ -4,7 +4,7 @@ import TaskListFilter from '../TaskListFilter';
 import { ListFilters, taskType } from '../types';
 import './styles.scss';
 import { pushToStorage, getFromStorage } from '../../storageUtils';
-/* TODO : 1. add keyboard event listeners and fix tabIndex  2.do media queries 3.do manifest and service worker for PWA */
+/* TODO :  2.do media queries 3.do manifest and service worker for PWA */
 const App = function() {
 
     const [data , setData] = useState(  getFromStorage() );
