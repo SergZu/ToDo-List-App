@@ -24,7 +24,7 @@ const TaskListTitle = function(props : TaskListTitleProps) {
     const formatedDate = formatDate(currentDate);
     const listTitleClass = addTaskMode ? 'TaskListTitle open' : 'TaskListTitle';
     const restLayout = addTaskMode ? (<TaskAddForm nextId={nextId} addTask={addTask} toggleMode={toggleMode} currentDate={currentDate} />) 
-    : (<><input className='TaskListTitle-search' type='text' value={searchQuery} 
+    : (<><input className='TaskListTitle-search' type='text' value={searchQuery}
         onChange={onSearchChangeHandler} placeholder={`Find in ${filterName}`} />
         <button className='TaskListTitle-add' onClick={onAddTaskClickHandler} onKeyPress={onAddTaskKeyPressedHandler}>Add Task</button></>); 
 

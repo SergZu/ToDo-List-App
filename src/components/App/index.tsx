@@ -4,7 +4,7 @@ import TaskListFilter from '../TaskListFilter';
 import { ListFilters, taskType } from '../types';
 import './styles.scss';
 import { pushToStorage, getFromStorage } from '../../storageUtils';
-/* TODO :  2.do media queries for landscapes and try span block over task checkbox input 2. add list attr to category input and hidden datalist with categories 3.do manifest and service worker for PWA */
+/* TODO :  2.do media queries for landscapes (<1024)  3.do manifest and service worker for PWA */
 const App = function() {
 
     const [data , setData] = useState(  getFromStorage() );

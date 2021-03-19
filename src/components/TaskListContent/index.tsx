@@ -18,6 +18,8 @@ const TaskListContent = function(props : TaskListContentProps) {
             if (item === '') return;
             categoriesMap[item] = [];
         })
+
+
         
         const filteredTasks = tasks.filter((item) => {
 
@@ -71,6 +73,7 @@ const TaskListContent = function(props : TaskListContentProps) {
         return result.length === 0 ? (<span id='task-list__no-tasks'>There are no tasks here</span>) :
                                     (<>{result}</>)
     };
+
     
     return (
         <ul className='task-list-content'>

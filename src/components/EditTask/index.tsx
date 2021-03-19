@@ -79,7 +79,7 @@ const EditTask = function(props : EditTaskProps) {
             <input type='button' className={importantBtnClass} onClick={onImportantClickHandler} value='Important' />
             {expiredDateLayout}
             <input type='text' className='taskEdit-category' onChange={onChangeCategoryHandler} placeholder='Task category' 
-                value={categoryInputValue} />
+                value={categoryInputValue}  list='categories' />
             <input type='button' className='taskEdit-btn__cancel' onClick={cancelTask} />
             <input type='button' className='taskEdit-btn__apply' onClick={submitTask} />
         </form>

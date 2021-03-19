@@ -22,12 +22,17 @@ const TaskList = function(props : TaskListProps) {
     }
     const nextId = computeID();
     const categories = createCategoryList();
+    const categoriesListForAutocomplete = categories.length > 0 ? 
+    (<datalist id="categories" hidden={true}>
+        {categories.map((item : string)=>(<option value={item} key={item} />))}
+    </datalist>) : null;
     return (
         <main className='TaskList'>
             <TaskListTitle currentFilter={currentFilter} currentDate={currentDate} searchQuery={searchQuery} 
                 makeQuery={makeQuery} addTask={addTask} nextId={nextId} />
             <TaskListContent tasks={tasks} categories={categories} currentFilter={currentFilter} showCompleted={showCompleted}
                 editTask={editTask} deleteTask={deleteTask} setTaskChecked={setTaskChecked} searchQuery={searchQuery}  currentDate={currentDate} />
+            {categoriesListForAutocomplete}
         </main>
     )
 };

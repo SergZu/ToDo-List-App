@@ -25,10 +25,14 @@
         }
     }
     @media screen and (min-width: 992px) {
-        width: 50%;
+        width: 75%;
         grid-template: 'mode mode im_flag im_flag'
                        'text text category category'
+                       'schedule schedule cancel apply'
                        'schedule schedule cancel apply';
+    }
+    @media screen and (min-width: 1280px) {
+        width: 60%;
     }
 }
 
@@ -47,6 +51,7 @@
     margin: 0 2.5%;
     border: 1px solid #222;
     border-radius: 10px;
+    text-align: center;
     &::placeholder {
         color:#111;
         font-style: italic;
@@ -56,13 +61,14 @@
         width: 75%;
         margin: 0 auto;
         font-size: 1rem;
+        padding: 0;
         &::placeholder {
             font-size: 1rem;
         }
     }
     @media screen and (min-width: 992px) {
         width: 90%;
-        margin: 2rem auto;
+        margin: 0 auto;
         font-size: 1.25rem;
         &::placeholder {
             font-size: 1.25rem;
@@ -123,9 +129,9 @@
         width: 25%;
         margin: 0 auto;
     }
-    @media screen and (min-width: 601px) {
+    @media screen and (min-width: 992px) {
         width: 50%;
-        margin: 1rem auto;
+        margin: .5rem auto 1rem;
     }
 }
 
@@ -135,6 +141,7 @@
     padding: .25rem 0;
     border: 1px solid #777;
     border-radius: 5px;
+    text-align: center;
     &::placeholder {
         text-align: center;
         font-style: italic;
@@ -148,7 +155,7 @@
     }
     @media screen and (min-width: 992px) {
         font-size: .9rem;
-        margin: 3rem auto;
+        margin: 0 auto 2rem;
         &::placeholder {
             font-size: .9rem;
         }

@@ -6,21 +6,11 @@
     margin: 0 .5rem;
     padding-bottom: .5rem;
     max-width: 100%;
+    @media screen and (min-width: 601px) {
+        padding-bottom: 0;
+    }
 }
 
-.task-element [type=checkbox] {
-    margin: 0 .5rem;
-    &:focus {
-        outline: none;
-        box-shadow: 0 0 10px 5px rgb(212, 214, 112);
-    }   
-    &:hover,:active {
-        box-shadow: 0 0 10px 5px rgb(212, 214, 112); 
-    }
-    @media screen and (min-width: 601px) {
-        display: none;
-    }
-}
 
 
 %important-block {
