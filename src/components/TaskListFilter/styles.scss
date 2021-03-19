@@ -7,18 +7,44 @@
     margin: 0 3px;
     border: 2px solid #777;
     border-radius: 2px;
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 10px 5px rgb(211, 123, 9);
+    }   
+    &:hover, &:active {
+        box-shadow: 0 0 10px 5px rgb(211, 123, 9); 
+    }
+    @media screen and (min-width: 601px) {
+        
+    width: 1rem;
+    height: 1rem;
+    margin: 0 .5rem;
+    }
 }
 
 %filter-checkbox__checked {
     @extend %filter-checkbox;
-    box-shadow: 1px 1px 1px #111 inset,
-        -1px -1px 1px #111 inset,
-        5px 5px 5px #ccc inset,
-        -5px -5px 5px #ccc inset;
+    box-shadow: inset 0 0 0 2px #111,
+                inset 0 10px 10px #ccc,
+                inset 0 -10px 10px #ccc;
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 10px 5px rgb(211, 123, 9),
+                        inset 0 0 0 2px #111,
+                        inset 0 10px 10px #ccc,
+                        inset 0 -10px 10px #ccc;
+        }   
+        &:hover, &:active {
+            box-shadow: 0 0 10px 5px rgb(211, 123, 9),
+                        inset 0 0 0 2px #111,
+                        inset 0 10px 10px #ccc,
+                        inset 0 -10px 10px #ccc;; 
+        }
 }
 
 .TaskListFilter {
-    font: bold 0.65rem/1 Georgia, sans-serif;
+    font: bold .65rem/1 Georgia, sans-serif;
     text-transform: uppercase;
     font-weight: 600;
     position: fixed;
@@ -32,6 +58,12 @@
     align-items: center;
     background-color: #111;
     color: #ccc;
+    @media screen and (min-width: 601px) {
+        font-size: .9rem;
+    }
+    @media screen and (min-width: 992px) {
+        width: 20%;
+    }
 }
 
 .TaskListFilter-item {
@@ -48,7 +80,7 @@
         box-shadow: inset 0 0 10px rgb(184, 175, 50); 
     }
     @media screen and (max-height: 500px){
-        padding: 0.5rem 0;
+        padding: .5rem 0;
     }
 }
 
@@ -68,39 +100,31 @@
     padding: 1.5rem 0;
     width: 100%;
     display: block;
-    font-size: 0.5rem;
+    font-size: .5rem;
     border-top: 2px solid #000;
     text-align: center;
-    input {
-        display: none;
-    }
-    span::before {
-        @extend %filter-checkbox; 
-    }
-    span {
+    #TaskListFilter-checkbox__text {
         display: inline-block;
         margin: 0 auto;
-    }
-    &:focus {
-        outline: none;
-        box-shadow: inset 0 0 10px rgb(211, 123, 9);
-    }   
-    &:hover, &:active {
-        box-shadow: inset 0 0 10px rgb(211, 123, 9); 
+        @media screen and (min-width: 601px){
+           font-size: .75rem;
+        }
     }
 }
 
+.TaskListFilter-checkbox {
+    @extend %filter-checkbox;
+}
+
 .checked {
-    span::before {
-        @extend %filter-checkbox__checked;
-    }
+    @extend %filter-checkbox__checked;
 }
 
 .TaskListFilter-btn__delete {
     margin-top: 2rem;
     padding: 0.5rem 0;
     width: 95%;
-    font-size: 0.65rem;
+    font-size: .65rem;
     color: #111;
     text-transform: uppercase;
     font-weight: 700;
@@ -112,9 +136,12 @@
     }
     &:focus {
         outline: none;
-        box-shadow: 0 0 10px rgb(212, 214, 112);
+        box-shadow: 0 0 10px 5px rgb(212, 214, 112);
     }   
     &:hover {
-        box-shadow: 0 0 10px rgb(212, 214, 112); 
+        box-shadow: 0 0 10px 5px rgb(212, 214, 112); 
+    }
+    @media screen and (min-width: 601px) {
+        font-size: .9rem;
     }
 }

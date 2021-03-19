@@ -6,17 +6,19 @@
     margin: 0 .5rem;
     padding-bottom: .5rem;
     max-width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .task-element [type=checkbox] {
     margin: 0 .5rem;
     &:focus {
         outline: none;
-        box-shadow: 0 0 10px rgb(212, 214, 112);
+        box-shadow: 0 0 10px 5px rgb(212, 214, 112);
     }   
     &:hover,:active {
-        box-shadow: 0 0 10px rgb(212, 214, 112); 
+        box-shadow: 0 0 10px 5px rgb(212, 214, 112); 
+    }
+    @media screen and (min-width: 601px) {
+        display: none;
     }
 }
 
@@ -40,14 +42,61 @@
     @extend %important-block;    
 }
 
+.taskCheckbox {
+        display: inline-block;
+        vertical-align: middle;
+        width: 1.25rem;
+        height: 1.25rem;
+        margin: 0 0.5rem;
+        border: 2px solid #999;
+        border-radius: 4px;
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 10px 5px rgb(212, 214, 112);
+        }   
+        &:hover,:active {
+            box-shadow: 0 0 10px 5px rgb(212, 214, 112); 
+        } 
+}
 
-
-.task-element-text {
-    font-size: 1.25rem;
-    [type=checkbox]:checked + & {
-        text-decoration: line-through;
+.taskChecked {   
+    display: inline-block;
+    vertical-align: middle;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: 0 0.5rem;
+    border: 2px solid #999;
+    border-radius: 4px;    
+    box-shadow:
+        inset 0 0 0 3px #333,
+        5px 5px 0 8px rgb(170, 151, 224) inset,
+        5px -5px 0 8px rgb(170, 151, 224) inset;
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 10px 5px rgb(212, 214, 112),
+        inset 0 0 0 3px #333,
+        5px 5px 0 8px rgb(170, 151, 224) inset,
+        5px -5px 0 8px rgb(170, 151, 224) inset;
+    }   
+    &:hover,:active {
+        box-shadow: 0 0 10px 5px rgb(212, 214, 112),
+        inset 0 0 0 3px #333,
+        5px 5px 0 8px rgb(170, 151, 224) inset,
+        5px -5px 0 8px rgb(170, 151, 224) inset; 
     }
 }
+
+.task-element-text {
+    font-size: 1rem;
+    line-height: 1.25;
+    .taskChecked + & {
+        text-decoration: line-through;
+    }
+    @media screen and (min-width: 601px) {
+        font-size: 1.15rem;   
+    }
+}
+
 
 .task-element-date {
     display: flex;
@@ -58,25 +107,33 @@
 }
 
 .task-elemen-btns {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin: .75rem auto;
+    margin: .75rem .5rem;
+    @media screen and (min-width: 992px) {
+        display: inline-flex;
+    }
 }
 
 %task-element-btn {
-    width: 1.75rem;
-    height: 1.75rem;
+    width: 1rem;
+    height: 1rem;
     padding: .75rem;
     margin: 0 .5rem;
     border: 1px solid transparent;
     border-radius: 5px;
     &:focus {
         outline: none;
-        box-shadow: 0 0 10px rgb(212, 214, 112);
+        box-shadow: 0 0 10px 5px rgb(212, 214, 112);
     }   
     &:hover,:active {
-        box-shadow: 0 0 10px rgb(212, 214, 112); 
+        box-shadow: 0 0 10px 5px rgb(212, 214, 112); 
+    }
+    @media screen and (min-width: 601px) {
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 10px; 
     }
 }
 

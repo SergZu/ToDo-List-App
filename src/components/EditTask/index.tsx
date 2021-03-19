@@ -12,7 +12,8 @@ const EditTask = function(props : EditTaskProps) {
      const onChangeTextHandler : React.ChangeEventHandler<HTMLTextAreaElement> = (evt) => {
         setTaskError(false); 
         const newData = {...taskData};
-        newData.text = evt.currentTarget.value;
+        const taskText  = evt.currentTarget.value.length < 150 ? evt.currentTarget.value : `${evt.currentTarget.value.slice(0, 150)}...`;
+        newData.text = taskText;
         changeTaskData(newData);
     };
 
@@ -32,7 +33,8 @@ const EditTask = function(props : EditTaskProps) {
 
     const onChangeCategoryHandler : React.ChangeEventHandler<HTMLInputElement> = (evt) => {
         const newData = {...taskData};
-        newData.category = evt.currentTarget.value; 
+        const taskCategory = evt.currentTarget.value.length < 40 ? evt.currentTarget.value : `${evt.currentTarget.value.slice(0, 40)}...`
+        newData.category = taskCategory; 
         changeTaskData(newData);
     };
 

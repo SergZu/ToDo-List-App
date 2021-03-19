@@ -6,7 +6,7 @@ const TaskListFilter = function(props : FilterProps) {
 
     const { currentFilter, changeFilter, deleteCompleted, showCompleted, changeViewCompletedSetting } = props;
 
-    const showCompletedCheckClass = showCompleted ? 'TaskListFilter-completed  checked' : 'TaskListFilter-completed';
+    const showCompletedCheckClass = showCompleted ? 'TaskListFilter-checkbox  checked' : 'TaskListFilter-checkbox';
     const filtersClassName = 'TaskListFilter-item';
     const activeFilterClassName = 'TaskListFilter-item active';
     const onClickHandler : React.MouseEventHandler = (evt) => {
@@ -24,8 +24,9 @@ const TaskListFilter = function(props : FilterProps) {
         if (evt.key === 'Enter') deleteCompleted()
     };
 
+
     return (
-        <aside className='TaskListFilter'>
+        <aside className='TaskListFilter' role="navigation" aria-label="Primary">
             <div className={currentFilter === 'All' ? activeFilterClassName : filtersClassName} id='All' 
                 onClick={onClickHandler} onKeyPress={onKeyPressHandler} tabIndex={1} >My Tasks</div>
             <div className={currentFilter === 'Today' ? activeFilterClassName : filtersClassName} id='Today' 
@@ -38,9 +39,11 @@ const TaskListFilter = function(props : FilterProps) {
                 onClick={onClickHandler} onKeyPress={onKeyPressHandler} tabIndex={1}>Anytime</div>
             <div className={currentFilter === 'Important' ? activeFilterClassName : filtersClassName} id='Important' 
                 onClick={onClickHandler} onKeyPress={onKeyPressHandler} tabIndex={1}>Important</div>
-            <label className={showCompletedCheckClass} tabIndex={1} onKeyPress={onKeyPressCheckedHandler}>
-                <input type="checkbox" checked={showCompleted} onChange={changeViewCompletedSetting} /><span>Completed</span>
-            </label>
+            <div className='TaskListFilter-completed'>
+                <span role="checkbox" aria-checked={showCompleted} aria-labelledby="TaskListFilter-checkbox__text" className={showCompletedCheckClass}  
+                onClick={changeViewCompletedSetting} onKeyPress={onKeyPressCheckedHandler} tabIndex={1} />
+                    <label id='TaskListFilter-checkbox__text' onClick={changeViewCompletedSetting} >Completed</label>
+            </div>
             <button className='TaskListFilter-btn__delete' onClick={deleteCompleted} onKeyPress={onKeyPressDeleteBtnHandler}>Delete all completed</button>
         </aside>
     )

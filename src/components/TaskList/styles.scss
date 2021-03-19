@@ -3,4 +3,7 @@
     margin: 0;
     margin-left: 25%;
     background-color: #444;
+    @media screen and (min-width: 992px) {
+        margin-left: 20%;
+    }
 }

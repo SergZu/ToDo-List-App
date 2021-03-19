@@ -1,5 +1,6 @@
 .task-editable {
     border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
     padding: 0.5rem 0;
     grid-column-start: 1;
     grid-column-end: -1;
@@ -14,14 +15,20 @@
     box-shadow: 0 -1px 1px #777;
     & input,
     & textarea {
-        
+        font-size: .9rem;
         &:focus {
             outline: none;
-            box-shadow: 0 0 10px rgb(211, 123, 9);
+            box-shadow: 0 0 10px 5px rgb(211, 123, 9);
         }   
         &:hover,:active {
-            box-shadow: 0 0 10px rgb(211, 123, 9); 
+            box-shadow: 0 0 10px 5px rgb(211, 123, 9); 
         }
+    }
+    @media screen and (min-width: 992px) {
+        width: 50%;
+        grid-template: 'mode mode im_flag im_flag'
+                       'text text category category'
+                       'schedule schedule cancel apply';
     }
 }
 
@@ -29,6 +36,9 @@
     grid-area: mode;
     margin: auto;
     text-transform: uppercase;
+    @media screen and (min-width: 601px) {
+        font-size: 1.5rem;
+    }
 }
 
 .taskEdit-text {
@@ -42,6 +52,22 @@
         font-style: italic;
         text-align: center;
     }
+    @media screen and (min-width: 601px) {
+        width: 75%;
+        margin: 0 auto;
+        font-size: 1rem;
+        &::placeholder {
+            font-size: 1rem;
+        }
+    }
+    @media screen and (min-width: 992px) {
+        width: 90%;
+        margin: 2rem auto;
+        font-size: 1.25rem;
+        &::placeholder {
+            font-size: 1.25rem;
+        } 
+    }
 }
 
 .invalid {
@@ -50,7 +76,6 @@
     &::placeholder {
         color:rgb(112, 3, 3);
         font-weight: bold;
-        text-align: center;
     }
 }
 
@@ -63,6 +88,10 @@
     background: url('../../icons/star.png') center no-repeat;
     background-size: contain;
     box-shadow: 0 0 1px #aaa;
+    @media screen and (min-width: 601px) { 
+        height: 2.25rem;
+        width: 2.25rem;  
+    }
 }
 
 .highlight {
@@ -73,11 +102,14 @@
     grid-area: schedule;
     margin: auto;
     text-align: center;
+    @media screen and (min-width: 601px) {
+        width: 25%;
+        margin: 0 auto;
+    }
 }
 
 .taskEdit-btn__schedule {
     grid-area: schedule;
-    margin: 0 25%;
     padding: 0.25rem 0;
     text-transform: uppercase;
     color: #222;
@@ -87,18 +119,40 @@
     border: 1px solid #111;
     border-radius: 10px;
     box-shadow: 0 0 5px rgb(238, 247, 214);
+    @media screen and (min-width: 601px) {
+        width: 25%;
+        margin: 0 auto;
+    }
+    @media screen and (min-width: 601px) {
+        width: 50%;
+        margin: 1rem auto;
+    }
 }
 
 .taskEdit-category {
     grid-area: category;
     margin: 0 2.5%;
-    padding: 0.25rem 0;
+    padding: .25rem 0;
     border: 1px solid #777;
     border-radius: 5px;
     &::placeholder {
         text-align: center;
         font-style: italic;
     }
+    @media screen and (min-width: 601px) {
+        width: 60%;
+        margin: 0 auto;
+        &::placeholder {
+            font-size: .75rem;
+        }
+    }
+    @media screen and (min-width: 992px) {
+        font-size: .9rem;
+        margin: 3rem auto;
+        &::placeholder {
+            font-size: .9rem;
+        }
+    } 
 }
 
 %taskEdit-btn {
@@ -109,10 +163,14 @@
     border-radius: 50%;
     &:focus {
         outline: none;
-        box-shadow: 0 0 10px rgb(236, 207, 169);
+        box-shadow: 0 0 10px 5px rgb(236, 207, 169);
     }   
     &:hover,:active {
-        box-shadow: 0 0 10px rgb(236, 207, 169); 
+        box-shadow: 0 0 10px 5px rgb(236, 207, 169); 
+    }
+    @media screen and (min-width: 601px) { 
+        width: 3.25rem;
+        height: 3.25rem; 
     }
 }
 

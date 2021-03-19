@@ -1,16 +1,30 @@
 .TaskListTitle {
     margin: 0 0 0 25%;
     height: 25vh;
+    min-height: fit-content;
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: 0.5rem;
-    transition: height ease 0.25s;
+    gap: .5rem;
+    transition: height ease-out 0.2s;
+    will-change: height;
+    @media screen and (max-width: 300px) {
+        grid-template-columns: minmax(90px, 3fr) minmax(60px, 2fr);
+        grid-template-rows: 3fr 2fr; 
+    }
+    @media screen and (min-width: 601px) {
+        grid-template-columns: 3fr 1fr;
+
+    }
+    @media screen and (min-width: 992px) {
+        margin-left: 20%;
+    }
 }
 
 .open { 
     height: 50vh;
     grid-template-rows: 1fr 3fr;
+    
 }
 
 
@@ -23,21 +37,35 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @media screen and (min-width: 601px) {
+        font-size: 2.25rem;
+        text-shadow: -1px 1px 0 hsla(46, 80%, 47%, 0.6),
+                     -2px 2px 0 hsla(46, 80%, 47%, 0.5),
+                     -3px 3px 0 hsla(46, 80%, 47%, 0.4);
+    }
 }
 
 .TaskListTitle-time {
     margin: auto 5%;
+    padding: .1rem;
     text-align: center;
-    display: flex;
+    display: flex;  
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
-    font: bold 3vw/1.5 Courier, monospace;
+    gap: .5rem;
+    font: bold .9rem/1.25 Courier, monospace;
     background-color: #111;
     border: 1px solid #111;
     border-radius: 5px;
     box-shadow: 1px 1px 1px #ccc,
     -1px -1px 1px #ccc;
+    @media screen and (min-width: 601px) {
+        margin: 1.5rem auto;
+    }
+    @media screen and (min-width: 768px) {
+        font-size: 18px;
+        padding: .25rem;
+    }
 }
 
 .TaskListTitle-search {
@@ -49,17 +77,35 @@
     }
     &:focus {
         outline: none;
-        box-shadow: 0 0 10px rgb(211, 123, 9);
+        box-shadow: 0 0 10px 5px rgb(211, 123, 9);
     }   
     &:hover,:active {
-        box-shadow: 0 0 10px rgb(211, 123, 9); 
+        box-shadow: 0 0 10px 5px rgb(211, 123, 9); 
+    }
+    @media screen and (max-width: 300px) {
+        margin: .25rem 0;
+        &::placeholder {
+            font-size: 1rem;
+        }
+    }
+    @media screen and (min-width: 301px) {
+        margin: .25rem 1rem;
+    }
+    @media screen and (min-width: 601px) {
+        width: 350px;
+        max-height: 100px;
+        margin: 1rem auto;
+        &::placeholder {
+            font-size: 1rem;
+            text-align: center;
+        }
     }
 }
 
 .TaskListTitle-add {
     text-transform: uppercase;
-    margin: 0.25rem auto;
-    font-size: 0.75rem;
+    margin: .25rem auto;
+    font-size: .75rem;
     font-weight: bold;
     background-color: rgb(39, 99, 62);
     border: 2px solid rgba(39, 99, 62, 0.25);
@@ -75,5 +121,17 @@
     }
     &:active {
         filter: saturate(300%); 
+    }
+    @media screen and (max-width: 300px) {
+        margin-right: 0.25rem;
+    }
+    @media screen and (min-width: 301px) {
+        font-size: .85rem;
+        margin: .25rem .5rem;
+    }
+    @media screen and (min-width: 601px) {
+        border-radius: 10px;
+        max-width: 125px;
+        max-height: 50px;
     }
 }
