@@ -15,9 +15,13 @@
     // Import non-ES modules as default imports.
     "esModuleInterop": true,
     // Process jsx expressions
-    "jsx": "react"
+    "jsx": "react",
+    "types": ["webpack-env"]
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }
