@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 const definePluginConfig = new webpack.DefinePlugin({
 	'process.env.NODE_ENV': JSON.stringify('production')
 });
@@ -26,7 +27,7 @@ module.exports = env => {
 		resolve: {
 			extensions: ['.ts', '.tsx', '.jsx', '.js', '.json'],
 		},
-
+		devtool: 'source-map' ,
 		plugins: [
 			new HtmlWebpackPlugin({ 
 				title: 'Webpack Test',
@@ -34,6 +35,10 @@ module.exports = env => {
 				filename: 'index.html'
 
 			}),
+			new WorkboxPlugin.GenerateSW({
+				       clientsClaim: true,
+				       skipWaiting: true
+				     }),
 			new CleanWebpackPlugin(),
 			definePluginConfig
 		],
@@ -62,7 +67,7 @@ module.exports = env => {
             	{
                 	test: /\.(scss|css)$/,
                 	exclude: /node_modules/,
-                	use: ['css-loader', 'postcss-loader', 'sass-loader'],
+                	use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
             	},
 
         	],
