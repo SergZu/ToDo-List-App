@@ -4,7 +4,7 @@ import TaskListFilter from '../TaskListFilter';
 import { ListFilters, taskType } from '../types';
 import './styles.scss';
 import { pushToStorage, getFromStorage } from '../../storageUtils';
-/* TODO :  2.do media queries for landscapes (<1024)  3.do manifest and service worker for PWA 4. make changes in template (add dev-dependency @types/webpack-env) */
+
 const App = function() {
 
     const [data , setData] = useState(  getFromStorage() );

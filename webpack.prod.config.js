@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const definePluginConfig = new webpack.DefinePlugin({
 	'process.env.NODE_ENV': JSON.stringify('production')
@@ -18,7 +17,7 @@ module.exports = env => {
 		context : path.resolve(__dirname, 'src'),
 
 		output: {
-			filename: '[name].[contenthash].bundle.js',
+			filename: '[name].bundle.js',
 			path: path.resolve(__dirname, 'build'),
 		},
 
@@ -36,7 +35,6 @@ module.exports = env => {
 
 			}),
 			new CleanWebpackPlugin(),
-			new MiniCssExtractPlugin(),
 			definePluginConfig
 		],
 
@@ -64,7 +62,7 @@ module.exports = env => {
             	{
                 	test: /\.(scss|css)$/,
                 	exclude: /node_modules/,
-                	use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
+                	use: ['css-loader', 'postcss-loader', 'sass-loader'],
             	},
 
         	],
