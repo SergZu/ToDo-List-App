@@ -8,9 +8,7 @@ interface categoriesMap {
 }
 
 
-const TaskListContent = function(props : TaskListContentProps) {
-    const { tasks, categories, currentFilter, editTask, deleteTask, setTaskChecked, showCompleted, searchQuery, currentDate} = props;
-
+const TaskListContent = function({ tasks, categories, currentFilter, editTask, deleteTask, setTaskChecked, showCompleted, searchQuery, currentDate } : TaskListContentProps) {
     const createTaskList = () => {
 
         const categoriesMap : categoriesMap = {'Unmarked' : []};

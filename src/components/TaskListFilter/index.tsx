@@ -2,9 +2,7 @@ import React from 'react';
 import './styles.scss';
 import { FilterProps, ListFilters } from '../types';
 
-const TaskListFilter = function(props : FilterProps) {
-
-    const { currentFilter, changeFilter, deleteCompleted, showCompleted, changeViewCompletedSetting } = props;
+const TaskListFilter = function({ currentFilter, changeFilter, deleteCompleted, showCompleted, changeViewCompletedSetting } : FilterProps) {
 
     const showCompletedCheckClass = showCompleted ? 'TaskListFilter-checkbox  checked' : 'TaskListFilter-checkbox';
     const filtersClassName = 'TaskListFilter-item';

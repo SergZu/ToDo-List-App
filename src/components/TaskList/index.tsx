@@ -6,8 +6,7 @@ import './styles.scss';
 
 
 
-const TaskList = function(props : TaskListProps) {
-    const {tasks, currentFilter, editTask, addTask, deleteTask, currentDate, searchQuery, makeQuery, setTaskChecked, showCompleted} = props;
+const TaskList = function({ tasks, currentFilter, editTask, addTask, deleteTask, currentDate, searchQuery, makeQuery, setTaskChecked, showCompleted } : TaskListProps) {
     const computeID = () => {
         if (tasks.length === 0) return '1';
         const sortedByIdTasks = [...tasks].sort((a,b) => Number(b.id) - Number(a.id));

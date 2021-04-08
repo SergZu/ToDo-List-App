@@ -4,8 +4,7 @@ import { TaskListTitleProps } from '../types';
 import {formatDate} from '../../dateUtils';
 import './styles.scss';
 
-const TaskListTitle = function(props : TaskListTitleProps) {
-    const {currentFilter, currentDate, addTask, searchQuery, makeQuery, nextId} = props;
+const TaskListTitle = function({ currentFilter, currentDate, addTask, searchQuery, makeQuery, nextId } : TaskListTitleProps) {
     const [ addTaskMode, switchAddTaskMode ] = useState(false);
     const toggleMode = () => {
         switchAddTaskMode( (modeState) => !modeState );

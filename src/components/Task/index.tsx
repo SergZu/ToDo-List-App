@@ -4,10 +4,9 @@ import {computeTimeDiff} from '../../dateUtils';
 import EditTask from '../EditTask';
 import './style.scss';
 
-    const Task = function(props : TaskElementType) {
+    const Task = function({ taskData, editTask, deleteTask, setTaskChecked, currentDate } : TaskElementType) {
     const [editMode, toggleEditMode] = useState(false);
-
-    const { taskData, editTask, deleteTask, setTaskChecked, currentDate } = props;   
+ 
     const { text, complete, important, id, expiredDate } = taskData;
     const toggleMode = () => {toggleEditMode((e) => !e)};
     const onCompleteHandler = () => { setTaskChecked(id) };

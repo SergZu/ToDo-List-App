@@ -2,8 +2,7 @@ import React from 'react';
 import EditTask from '../EditTask';
 import { TaskAddFormProps } from '../types';
 
-const TaskAddForm = function(props : TaskAddFormProps) {
-    const { nextId, addTask, toggleMode, currentDate } = props;
+const TaskAddForm = function({ nextId, addTask, toggleMode, currentDate } : TaskAddFormProps) {
     const initTask = (id : string) => ({
         id,
         text : '',
