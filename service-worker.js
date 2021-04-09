@@ -1,16 +1,16 @@
 const cacheName = 'app-cache-v1';
 
 const assetsUrls = [
-    '/index.html',
-    '/offline.html',
-    '/562da37d6e67dc462463.png',
-    '/a53e6c1ad8f07dfc3b85.png',
-    '/b55ff10166658c2c2294.png',
-    '/ba0cee2f4f5d87e2e775.png',
-    '/bbf45acebb209809c712.png',
-    '/main.bundle.js',
-    '/runtime.bundle.js',
-    '/vendors.bundle.js'
+    './index.html',
+    './offline.html',
+    './562da37d6e67dc462463.png',
+    './a53e6c1ad8f07dfc3b85.png',
+    './b55ff10166658c2c2294.png',
+    './ba0cee2f4f5d87e2e775.png',
+    './bbf45acebb209809c712.png',
+    './main.bundle.js',
+    './runtime.bundle.js',
+    './vendors.bundle.js'
 ];
 
 const takeFromCache = async (request) => {
