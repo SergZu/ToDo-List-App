@@ -1,4 +1,4 @@
-const cacheName = 'app-cache-v1';
+const cacheName = 'app-cache-v2';
 
 const assetsUrls = [
     './offline.html',
@@ -13,8 +13,21 @@ const assetsUrls = [
 ];
 
 const takeFromCache = async (request) => {
-    const cached = await caches.match(request);
-    return cached ?? await fetch(request)
+    try {
+        const cached = await caches.match(request);
+        if (cached) {
+            return cached;     
+        } else {
+            const response = await fetch(request);
+            const cache = await caches.open(cacheName);
+            await cache.put(request.url, response.clone());
+            return response
+        }
+    }
+    catch(err) {
+        console.log('Fetch error', err);
+        return cache.match('./offline.html')
+    }
 }
 
 self.addEventListener('install', async () => {
@@ -23,28 +36,8 @@ self.addEventListener('install', async () => {
 });
 
 self.addEventListener('fetch', (evt) => {
-    evt.respondWith(
-        caches.match(evt.request)
-            .then(function(response) {
-            if (response) {
-                return response;     
-            } else {
-                return fetch(evt.request)     
-                    .then(function(res) {
-                        return caches.open(cacheName)
-                    .then(function(cache) {
-                  cache.put(evt.request.url, res.clone());    
-                  return res;   
-                })
-            })
-            .catch(function(err) {       
-                console.log('Fetch error', err);
-                return cache.match('/offline.html')
-            });
-        }
-      })
+    evt.respondWith( takeFromCache(evt.request) )
         
-    );
 })
 
 self.addEventListener('activate', async () => {
