@@ -1,2 +1,58 @@
-if(!self.define){const e=e=>{"require"!==e&&(e+=".js");let r=Promise.resolve();return n[e]||(r=new Promise((async r=>{if("document"in self){const n=document.createElement("script");n.src=e,document.head.appendChild(n),n.onload=r}else importScripts(e),r()}))),r.then((()=>{if(!n[e])throw new Error(`Module ${e} didn’t register its module`);return n[e]}))},r=(r,n)=>{Promise.all(r.map(e)).then((e=>n(1===e.length?e[0]:e)))},n={require:Promise.resolve(r)};self.define=(r,i,s)=>{n[r]||(n[r]=Promise.resolve().then((()=>{let n={};const c={uri:location.origin+r.slice(1)};return Promise.all(i.map((r=>{switch(r){case"exports":return n;case"module":return c;default:return e(r)}}))).then((e=>{const r=s(...e);return n.default||(n.default=r),n}))})))}}define("./service-worker.js",["./workbox-994aa968"],(function(e){"use strict";self.skipWaiting(),e.clientsClaim(),e.precacheAndRoute([{url:"562da37d6e67dc462463.png",revision:null},{url:"a53e6c1ad8f07dfc3b85.png",revision:null},{url:"b55ff10166658c2c2294.png",revision:null},{url:"ba0cee2f4f5d87e2e775.png",revision:null},{url:"bbf45acebb209809c712.png",revision:null},{url:"main.bundle.js",revision:"3cb9edb9047c0a53d56f7d0091011dcb"},{url:"runtime.bundle.js",revision:"1eec68d9a070c68360af98f0b9904930"},{url:"vendors.bundle.js",revision:"54c2c3283b6d3f455a50dc7680ac0946"},{url:"vendors.bundle.js.LICENSE.txt",revision:"f5fc2afae58c4ffc30c6148864765d4b"}],{})}));
+const cacheName = 'app-cache-v1';
 
+const assetsUrls = [
+    '/index.html',
+    '/offline.html',
+    '/562da37d6e67dc462463.png',
+    '/a53e6c1ad8f07dfc3b85.png',
+    '/b55ff10166658c2c2294.png',
+    '/ba0cee2f4f5d87e2e775.png',
+    '/bbf45acebb209809c712.png',
+    '/main.bundle.js',
+    '/runtime.bundle.js',
+    '/vendors.bundle.js'
+];
+
+const takeFromCache = async (request) => {
+    const cached = await caches.match(request);
+    return cached ?? await fetch(request)
+}
+
+self.addEventListener('install', async () => {
+    const cache = await caches.open(cacheName);
+    await cache.addAll(assetsUrls);
+});
+
+self.addEventListener('fetch', (evt) => {
+    evt.respondWith(
+        caches.match(evt.request)
+            .then(function(response) {
+            if (response) {
+                return response;     
+            } else {
+                return fetch(evt.request)     
+                    .then(function(res) {
+                        return caches.open(cacheName)
+                    .then(function(cache) {
+                  cache.put(evt.request.url, res.clone());    
+                  return res;   
+                })
+            })
+            .catch(function(err) {       
+                console.log('Fetch error', err);
+                return cache.match('/offline.html')
+            });
+        }
+      })
+        
+    );
+})
+
+self.addEventListener('activate', async () => {
+    const cachesNames = await caches.keys();
+    await Promise.all(
+        cachesNames
+        .filter((item) => item !== cacheName)
+        .map((item) => caches.delete(item))
+    )
+})
