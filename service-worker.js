@@ -1,7 +1,6 @@
 const cacheName = 'app-cache-v1';
 
 const assetsUrls = [
-    './index.html',
     './offline.html',
     './562da37d6e67dc462463.png',
     './a53e6c1ad8f07dfc3b85.png',
