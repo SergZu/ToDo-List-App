@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
 const definePluginConfig = new webpack.DefinePlugin({
 	'process.env.NODE_ENV': JSON.stringify('production')
 });
@@ -35,10 +34,6 @@ module.exports = env => {
 				filename: 'index.html'
 
 			}),
-			new WorkboxPlugin.GenerateSW({
-				       clientsClaim: true,
-				       skipWaiting: true
-				     }),
 			new CleanWebpackPlugin(),
 			definePluginConfig
 		],
