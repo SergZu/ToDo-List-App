@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TaskElementType } from '../types';
 import {computeTimeDiff} from '../../dateUtils';
 import EditTask from '../EditTask';
+import notificationAlert from '../../notificationUtil';
 import './style.scss';
 
     const Task = function({ taskData, editTask, deleteTask, setTaskChecked, currentDate } : TaskElementType) {
@@ -20,6 +21,10 @@ import './style.scss';
     const importantFlagClass = important ? 'task-element-important' : 'task-element-common';
     const remainTimeblockClass = remainTime.length !== 0 ? 'task-element-date' : 'hidden';
     const taskCheckboxClass = complete ? 'taskCheckbox taskChecked' : 'taskCheckbox';
+        
+    if ( Number(expiredDate) - Number(currentDate) > 240000 && Number(expiredDate) - Number(currentDate) < 300000  ) {
+            notificationAlert(`${remainTime} for ${text}`)
+        }
 
     const editModeLayout = (
             <EditTask toggleMode={toggleMode} currentDate={currentDate} task={taskData} editTask={editTask} />
