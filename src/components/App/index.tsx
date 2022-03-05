@@ -75,10 +75,23 @@ const App = function() {
 
     return (
         <div className='TaskListApp' role="application">
-            <TaskListFilter currentFilter={currentFilter} changeFilter={changeFilter} deleteCompleted={deleteAllCompleted}
-            showCompleted={showCompleted} changeViewCompletedSetting={changeViewCompletedSetting} />
-            <TaskList tasks={data} currentFilter={currentFilter} editTask={editTask} addTask={addTask} deleteTask={deleteTask} 
-            currentDate={currentDate} searchQuery={searchQuery} makeQuery={makeQuery} setTaskChecked={setTaskChecked} showCompleted={showCompleted} />
+            <TaskListFilter 
+                            currentFilter={currentFilter} 
+                            changeFilter={changeFilter} 
+                            deleteCompleted={deleteAllCompleted}
+                            showCompleted={showCompleted} 
+                            changeViewCompletedSetting={changeViewCompletedSetting} />
+            <TaskList 
+                      tasks={data} 
+                      currentFilter={currentFilter} 
+                      editTask={editTask} 
+                      addTask={addTask} 
+                      deleteTask={deleteTask} 
+                      currentDate={currentDate} 
+                      searchQuery={searchQuery} 
+                      makeQuery={makeQuery} 
+                      setTaskChecked={setTaskChecked} 
+                      showCompleted={showCompleted} />
         </div>
     )
 }
