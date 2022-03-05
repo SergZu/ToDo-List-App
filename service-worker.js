@@ -1,4 +1,4 @@
-const cacheName = 'app-cache-v4';
+const cacheName = 'app-cache-v5';
 
 const assetsUrls = [
     './offline.html',
@@ -26,7 +26,7 @@ const takeFromCache = async (request) => {
     }
     catch(err) {
         console.log('Fetch error', err);
-        return cache?.match('./offline.html')
+        return caches?.match('./offline.html')
     }
 }
 
