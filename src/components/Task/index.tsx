@@ -5,7 +5,13 @@ import EditTask from '../EditTask';
 import notificationAlert from '../../notificationUtil';
 import './style.scss';
 
-    const Task = function({ taskData, editTask, deleteTask, setTaskChecked, currentDate } : TaskElementType) {
+    const Task = function({ 
+                            taskData, 
+                            editTask, 
+                            deleteTask, 
+                            setTaskChecked, 
+                            currentDate 
+                            } : TaskElementType) {
     const [editMode, toggleEditMode] = useState(false);
  
     const { text, complete, important, id, expiredDate } = taskData;
@@ -17,32 +23,69 @@ import './style.scss';
     const onEditTaskHandler = () => { toggleMode() };
     const onDeleteTaskHandler = () => { deleteTask(id) };
 
-    const remainTime = expiredDate !== '' ? computeTimeDiff(Number(expiredDate)) : '';     
-    const importantFlagClass = important ? 'task-element-important' : 'task-element-common';
-    const remainTimeblockClass = remainTime.length !== 0 ? 'task-element-date' : 'hidden';
-    const taskCheckboxClass = complete ? 'taskCheckbox taskChecked' : 'taskCheckbox';
+    const remainTime = expiredDate !== '' ? 
+                                            computeTimeDiff(Number(expiredDate)) : 
+                                            '';     
+    const importantFlagClass = important ? 
+                                            'task-element-important' : 
+                                            'task-element-common';
+    const remainTimeblockClass = remainTime.length !== 0 ? 
+                                                            'task-element-date' : 
+                                                            'hidden';
+    const taskCheckboxClass = complete ? 
+                                            'taskCheckbox taskChecked' : 
+                                            'taskCheckbox';
         
     if ( Number(expiredDate) - Number(currentDate) > 240000 && Number(expiredDate) - Number(currentDate) < 300000  ) {
             notificationAlert(`${remainTime} for ${text}`)
         }
 
     const editModeLayout = (
-            <EditTask toggleMode={toggleMode} currentDate={currentDate} task={taskData} editTask={editTask} />
+            <EditTask 
+                        toggleMode={toggleMode} 
+                        currentDate={currentDate} 
+                        task={taskData} 
+                        editTask={editTask} 
+             />
     );
     const taskElementLayout = (
                 <div className='task-element'>
-                                <div className={importantFlagClass}></div>
-                                <span className={taskCheckboxClass} role='checkbox' aria-checked={complete} aria-labelledby={`taskElement-${id}`} 
-                                onClick={onCompleteHandler} onKeyPress={onCompleteKeyPressHandler} tabIndex={0} />
-                                <label className='task-element-text' id={`taskElement-${id}`} onClick={onCompleteHandler}>{text}</label>
+                                <div className={importantFlagClass}>
+                                </div>
+                                <span 
+                                        className={taskCheckboxClass} 
+                                        role='checkbox' 
+                                        aria-checked={complete} 
+                                        aria-labelledby={`taskElement-${id}`} 
+                                        onClick={onCompleteHandler} 
+                                        onKeyPress={onCompleteKeyPressHandler} 
+                                        tabIndex={0} 
+                                 />
+                                <label 
+                                        className='task-element-text' 
+                                        id={`taskElement-${id}`} 
+                                        onClick={onCompleteHandler}>
+                                    {text}
+                                </label>
                                 <div className='task-elemen-btns'>
-                                        <span className={remainTimeblockClass}>{remainTime}</span>
-                                        <button className='task-element-btn__edit' onClick={onEditTaskHandler}></button>
-                                        <button className='task-element-btn__delete' onClick={onDeleteTaskHandler}></button>
+                                        <span 
+                                                className={remainTimeblockClass}>
+                                                                                    {remainTime}
+                                        </span>
+                                        <button 
+                                                className='task-element-btn__edit' 
+                                                onClick={onEditTaskHandler}>
+                                        </button>
+                                        <button 
+                                                className='task-element-btn__delete' 
+                                                onClick={onDeleteTaskHandler}>
+                                        </button>
                                 </div>
                </div>)
 
-    const resultLayout = editMode ? editModeLayout : taskElementLayout;
+    const resultLayout = editMode ? 
+                                    editModeLayout : 
+                                    taskElementLayout;
 
     return (<>
             {resultLayout}
