@@ -18,18 +18,18 @@ const TaskListContent = function({
                                     showCompleted, 
                                     searchQuery, 
                                     currentDate 
-    } : TaskListContentProps) {
+                                } : TaskListContentProps) {
     const createTaskList = () => {
 
         const categoriesMap : categoriesMap = {
             'Unmarked' : []
         };
         categories
-                    .sort()
-                    .forEach((item) => {
-            if (item === '') return;
-            categoriesMap[item] = [];
-        })
+                  .sort()
+                  .forEach((item) => {
+                                        if (item === '') return;
+                                        categoriesMap[item] = [];
+                                     })
 
 
         
